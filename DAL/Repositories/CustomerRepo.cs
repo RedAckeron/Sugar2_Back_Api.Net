@@ -1,0 +1,102 @@
+﻿using DAL.Interfaces;
+using DAL.Mapper;
+using DAL.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System.Data;
+using ToolBox;
+using Tools.Ado;
+
+namespace DAL.Repositories
+{
+    public class CustomerRepo:ICustomerRepo
+	{
+		TextColor TextColor = new TextColor("", "", "", "");
+
+		private string _connectionString;
+		
+		//private readonly IDbConnection _connection;
+		
+		public CustomerRepo(IConfiguration config, IDbConnection connection)
+		{
+			_connectionString = config.GetConnectionString("default");
+        }
+
+	#region Create
+		public int Create(Customer C)
+		{
+			using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+			{
+				dbConnection.Open();
+				try
+				{
+					int rows = 0;
+					rows = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Customer_Create", true, new { C.FirstName,C.LastName, C.AddByUser });
+					DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Log_Create", true, new { Priority = 2, AddByUser = 1, Msg = $"Creation du customer {C.FirstName} {C.LastName}" });
+
+					TextColor.Write("customer", "create", $"Creation du customer {C.FirstName} {C.LastName}" , "green");
+					return rows;
+				}
+				catch (Exception ex)
+				{
+					TextColor.Write("customer", "create", ex.Message, "red");
+					return 0;
+				}
+			}
+		}
+	#endregion
+	#region Read
+		public Customer? Read(int IdCust)
+		{
+			Customer Customer= null;
+			try
+			{
+				using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+				{
+					dbConnection.Open();
+					Customer = dbConnection.ExecuteReader("SP_Customer_Read", dr => dr.DataToCustomer(), true, new { IdCust=IdCust }).SingleOrDefault();
+					if (Customer != null)
+					{
+						TextColor.Write("customer", "read", $"Lecture du client {Customer.FirstName} {Customer.LastName}", "green");
+					}
+					else TextColor.Write("customer", "read", "Il n existe aucun customer avec l ID " + IdCust, "orange");
+				}
+			}
+			catch (Exception ex)
+			{
+				TextColor.Write("customer", "read", ex.Message, "orange");
+			}
+			return Customer;
+		}
+	#endregion
+	#region Update
+		public int Update(Customer C)
+		{
+			using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+			{
+				{ }
+				dbConnection.Open();
+				try
+				{
+					int result = 0;
+					result = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Customer_Update", true, new {C.Id, C.FirstName, C.LastName});
+					TextColor.Write("0000000customer", "update", $"Mise a jours du customer {C.Id} OK", "green");
+					return result;
+				}
+				catch (Exception ex)
+				{
+					TextColor.Write("customer", "update", ex.Message, "orange");
+					return 0;
+				}
+			}
+		}
+	#endregion
+	#region Delete
+		public int Delete(int IdCust)
+		{
+			return 0;
+		}
+	#endregion
+	}
+
+}

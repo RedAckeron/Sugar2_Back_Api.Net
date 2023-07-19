@@ -1,0 +1,184 @@
+﻿using DAL.Interfaces;
+using DAL.Mapper;
+using DAL.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System.ComponentModel;
+using System.Data;
+using System.Data.Common;
+using System.Reflection.PortableExecutable;
+using ToolBox;
+using Tools.Ado;
+namespace DAL.Repositories
+{
+    public class UserRepo:IUserRepo
+	{
+		TextColor TextColor = new TextColor("","","", "black");
+		private string ?_connectionString;
+
+        public UserRepo(IConfiguration config, IDbConnection connection)
+		{
+			_connectionString = config.GetConnectionString("default");
+        }
+        
+        #region CREATE
+        public int Create(User U)
+		{
+            using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+            {
+                dbConnection.Open();
+                try
+                {
+                    int rows = 0;
+					rows = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_User_Create", true, new { U.LastName, U.FirstName, U.Email, U.Password });
+                    DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Log_Create", true, new { Priority=2,AddByUser=1,Msg="Creation d un utilisateur" });
+
+                    TextColor.Write("user", "create", "Creation du user " +U.Email+" : OK", "green");
+					return rows;
+				}
+				catch (Exception ex)
+                {
+					TextColor.Write("user","create","Email existe deja en DB", "red");
+                    return 0;
+                }
+            }
+        }
+        #endregion
+        
+        #region READ
+        public User? Read(int IdUser)
+		{
+            User user = null;
+            try
+            {
+                using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+                {
+                    dbConnection.Open();
+                    user= dbConnection.ExecuteReader("SP_User_Read", dr => dr.DataToUser(), true, new { Id= IdUser}).SingleOrDefault();
+                    if (user != null)
+                        {
+						    user.Password = null;
+						    TextColor.Write("user", "read", "User Read : " + user.Email + " OK", "green");
+					    }
+					else TextColor.Write("user", "read", "Il n existe aucun user avec l ID " +IdUser, "orange");
+				}
+			}
+            catch (Exception ex)
+            {
+                TextColor.Write("user", "read", "Il n existe pas de user avec l id "+IdUser+" en DB", "orange");
+            }
+            return user;
+		}
+        #endregion
+        
+        #region LOGIN
+        public User? Login(string Email, string Passwd)
+			{
+            User user = null;
+            try
+            {
+                using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+                {
+                    dbConnection.Open();
+                    user = dbConnection.ExecuteReader("SP_User_Login", dr => dr.DataToUser(), true, new { Email=Email, Password=Passwd }).SingleOrDefault();
+                    if (user != null) TextColor.Write("user", "login", $"User {user.Email} : OK", "green"); 
+					else TextColor.Write("user", "login", "User est null", "red");
+                }
+			}
+            catch (Exception ex)
+                {
+                    TextColor.Write("user", "create", "Login ou mot de passe incorrect", "red");
+                }
+            return user;
+        }
+        #endregion
+        
+        #region UPDATE
+        public int Update(User U)
+		{
+            using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+            {
+                dbConnection.Open();
+				try
+				{
+                    int result =0;
+					result = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_User_Update", true, new { U.Id, U.Email, U.FirstName, U.LastName });
+                    TextColor.Write("user", "update", "Mise a jours de " +result+" user OK", "Succes");
+                    return result;
+				}
+				catch (Exception ex)
+				{
+                    TextColor.Write("user", "update","La mise a jours du user "+U.Id+" n est pas possible", "Error");
+                    return 0;
+				}
+			}
+		}
+        #endregion
+        
+        public bool Enable(int IdUser)
+        {
+            using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+            {
+                dbConnection.Open();
+                try
+                {
+                    int result = 0;
+                    result = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_User_Enable", true, new { IdUser});
+                    DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Log_Create", true, new { Priority = 2, AddByUser = 1, Msg = "Activation du User "+IdUser });
+                    TextColor.Write("user", "create", "User Enable " + result + " OK", "Succes");
+                    if (result != 0) return true;
+                    else return false;
+                }
+                catch (Exception ex)
+                {
+                    TextColor.Write("user", "create", ex.Message, "Error");
+                    return false;
+                }
+            }
+        }
+        //####################################################################################################################################################################
+        public bool Disable(int IdUser)
+        {
+            using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+            {
+                dbConnection.Open();
+                try
+                {
+                    int result = 0;
+                    result = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_User_Disable", true, new { IdUser });
+                    DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Log_Create", true, new { Priority = 2, AddByUser = 1, Msg = "Désactivation du User "+IdUser });
+
+                    TextColor.Write("user", "create", "User Disable " + result + " OK", "Succes");
+                    if (result != 0) return true;
+                    else return false;
+                }
+                catch (Exception ex)
+                {
+                    TextColor.Write("user", "create", ex.Message, "Error");
+                    return false;
+                }
+            }
+        }
+        //####################################################################################################################################################################
+        public int Delete(int IdUser)
+		{
+            using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+            {
+                dbConnection.Open();
+                try
+                {
+                    int result = 0;
+                    result = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_User_Delete", true, new { IdUser });
+                    DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Log_Create", true, new { Priority = 1, AddByUser = 1, Msg = "Supression du User "+IdUser });
+                    TextColor.Write("user", "create", "User Delete " + result + " OK", "Succes");
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    TextColor.Write("user", "create", ex.Message, "Error");
+                    return 0;
+                }
+            }
+        }
+	}
+}

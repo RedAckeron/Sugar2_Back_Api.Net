@@ -4,6 +4,7 @@ using DAL.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Data;
+using System.Data.Common;
 using ToolBox;
 using Tools.Ado;
 
@@ -100,8 +101,39 @@ namespace DAL.Repositories
     #region FindCustomer
         public List<Customer> FindCustomer(string cust)
 		{
-			Console.WriteLine("Find customer");
-			return null;
+            List<Customer> Customers = new List<Customer>();
+			try
+			{
+            using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+				{
+                using (SqlConnection cnx = new SqlConnection(_connectionString))
+                    {
+                    using (SqlCommand cmd = cnx.CreateCommand())
+						{
+						cmd.CommandText = $"Exec SP_Customer_FindCustomer @Customer='%{@cust}%';";
+						cmd.Parameters.AddWithValue("cust", @cust);
+							
+							cnx.Open();
+							using (SqlDataReader reader = cmd.ExecuteReader())
+							{
+								while (reader.Read())
+								{
+									Customers.Add(CustomerMapper.DataToFindCustomer(reader));
+									
+                                }
+                            TextColor.Write("customer", "FindCustomer", $"Récuperation de {Customers.Count} customer avec le mot {cust}" , "green");
+
+                            }
+                        }
+                    }
+				}
+			}
+        catch (Exception ex)
+			{
+				TextColor.Write("customer", "FindCustomer", ex.Message, "orange");
+			}
+        return Customers;
+
 		}
     #endregion
     }

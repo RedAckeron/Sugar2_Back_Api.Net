@@ -52,11 +52,12 @@ namespace ToolBox
 
 			switch (verb.ToLower())
 			{
-				case "create": Verbe = "CREATE    ║"; break;
-				case "read": Verbe = "READ      ║"; break;
-				case "update": Verbe = "UPDATE    ║"; break;
-				case "delete": Verbe = "DELETE    ║"; break;
-                case "login": Verbe = "LOGIN     ║"; break;
+				case "create": Verbe = "CREATE      ║"; break;
+				case "read": Verbe = "READ        ║"; break;
+				case "update": Verbe = "UPDATE      ║"; break;
+				case "delete": Verbe = "DELETE      ║"; break;
+                case "login": Verbe = "LOGIN       ║"; break;
+                case "findcustomer": Verbe = "FINDCUSTOMER║"; break;
 
                 default: Verbe = "UNKNOWN   ║"; break;
 			}

@@ -20,5 +20,17 @@ namespace DAL.Mapper
 				DtIn = (DateTime)reader["DtIn"]
 			};
 		}
+	public static Customer DataToFindCustomer(this IDataRecord reader) 
+		{
+			return new Customer()
+			{
+				Id = (int)reader["id"],
+				FirstName = (string)reader["FirstName"],
+				LastName = (string)reader["LastName"],
+				DtIn = DateTime.Now
+
+			};
+
+        }
 	}
 }

@@ -9,7 +9,7 @@ using System;
 namespace BLL.Services
 {
     public class CmdService:ICmdService
-    { 
+    {
     private readonly ICmdRepo _cmdRepo;
     private readonly IItemRepo _itemRepo;
 
@@ -31,7 +31,7 @@ namespace BLL.Services
     public int Update(Cmd Cmd) 
         {
             return _cmdRepo.Update(Cmd);
-        }  
+        }
     public int Delete(int IdCmd) 
         {
             return _cmdRepo.Delete(IdCmd);

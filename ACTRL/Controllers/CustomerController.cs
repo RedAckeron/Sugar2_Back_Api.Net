@@ -40,6 +40,11 @@ namespace Sugar_Back_V2.Controllers
         {
             return Ok(_customerService.Delete(IdCust));
         }
+        [HttpGet("FindCustomer/{cust}")]
+        public IActionResult FindCustomer(string cust)
+        {
+            return Ok(_customerService.FindCustomer(cust));
+        }
     }
 
 }

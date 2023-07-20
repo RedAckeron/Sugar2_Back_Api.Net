@@ -96,7 +96,13 @@ namespace DAL.Repositories
 		{
 			return 0;
 		}
-	#endregion
-	}
-
+    #endregion
+    #region FindCustomer
+        public List<Customer> FindCustomer(string cust)
+		{
+			Console.WriteLine("Find customer");
+			return null;
+		}
+    #endregion
+    }
 }

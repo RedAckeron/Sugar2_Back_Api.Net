@@ -31,6 +31,11 @@ namespace BLL.Services
            
             return _customerRepo.Delete(id);
         }
+        public List<Customer> FindCustomer(string cust)
+        {
+            return _customerRepo.FindCustomer(cust);
+        }
+
         
     }
 }

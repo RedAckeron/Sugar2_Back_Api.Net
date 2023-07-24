@@ -46,5 +46,4 @@ namespace Sugar_Back_V2.Controllers
             return Ok(_customerService.FindCustomer(cust));
         }
     }
-
 }

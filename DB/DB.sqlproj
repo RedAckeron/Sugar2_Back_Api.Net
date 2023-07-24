@@ -99,6 +99,7 @@
     <Build Include="Procedures\Cmd\Read.sql" />
     <Build Include="Procedures\Cmd\AddItem.sql" />
     <Build Include="Procedures\Customer\FindCustomer.sql" />
+    <Build Include="Procedures\Cmd\ReadAllCmdLight.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DB.publish.xml" />

@@ -22,5 +22,14 @@ namespace DAL.Mapper
 				DtIn = (DateTime)reader["DtIn"],
 			};
 		}
+		public static CmdLight DataToCmdLight(this IDataRecord reader)
+		{
+			return new CmdLight()
+			{
+				Id = (int)reader["id"],
+				DtIn = (DateTime)reader["DtIn"],
+			};
+		
+		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using BLL.Interfaces;
+using BLL.Services;
 using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,6 +45,11 @@ namespace Sugar_Back_V2.Controllers
         public IActionResult AddItemToCmd(int IdCmd,int IdItem,int Qt,int AddByUser)
         {
             return Ok(_cmdService.AddItemToCmd(IdCmd ,IdItem,Qt,AddByUser));
+        }
+        [HttpGet("ReadAllCmdLight/{IdCust}")]
+        public IActionResult ReadAllCmdLight(int IdCust)
+        {
+            return Ok(_cmdService.ReadAllCmdLight(IdCust));
         }
     }
 }

@@ -16,4 +16,10 @@ namespace DAL.Models
         public DateTime DtIn{ get; set; }
         public List<Item> Basket { get; set; }
     }
+    public class CmdLight
+    {
+        public int Id { get; set; }
+        public DateTime DtIn { get; set; }
+
+    }
 }

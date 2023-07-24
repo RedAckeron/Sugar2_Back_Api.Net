@@ -138,6 +138,42 @@ namespace DAL.Repositories
 			}
 			return rows;
 		}
-		#endregion
-	}
+        #endregion
+		#region ReadAllCmdLight
+        public List<CmdLight> ReadAllCmdLight(int  IdCust)
+        {
+            List<CmdLight> Cmds = new List<CmdLight>();
+            try
+            {
+                using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+                {
+                    using (SqlConnection cnx = new SqlConnection(_connectionString))
+                    {
+                        using (SqlCommand cmd = cnx.CreateCommand())
+                        {
+                            cmd.CommandText = $"Exec SP_Cmd_ReadAllCmdLight @IdCust={IdCust};";
+                            cmd.Parameters.AddWithValue("IdCust", IdCust);
+
+                            cnx.Open();
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+									Console.WriteLine(reader["id"]+" "+reader["DtIn"]);
+                                    Cmds.Add(CmdMapper.DataToCmdLight(reader));
+                                }
+                                TextColor.Write("Command", "ReadAllCmdLight", $"Récuperation de {Cmds.Count} commandes pour le client id {IdCust}", "green");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TextColor.Write("Command", "ReadAllCmdLight", ex.Message, "orange");
+            }
+            return Cmds;
+        }
+        #endregion
+    }
 }

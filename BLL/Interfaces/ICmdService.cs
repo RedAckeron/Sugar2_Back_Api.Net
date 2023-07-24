@@ -9,5 +9,7 @@ namespace BLL.Interfaces
         int Update(Cmd Cmd);
         int Delete(int IdCmd);
         int AddItemToCmd(int IdCmd, int IdItem,int Qt,int AddByUser);
-        }
+        List<CmdLight> ReadAllCmdLight(int IDCust);
+
+    }
 }

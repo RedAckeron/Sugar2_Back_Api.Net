@@ -40,5 +40,9 @@ namespace BLL.Services
         {
             return _cmdRepo.AddItemToCmd(IdCmd,IdItem,Qt,AddByUser);
         }
+    public List<CmdLight> ReadAllCmdLight(int IdCust)
+        {
+            return _cmdRepo.ReadAllCmdLight(IdCust);
+        }
     }
 }

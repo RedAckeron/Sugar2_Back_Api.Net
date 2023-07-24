@@ -14,6 +14,5 @@ namespace DAL.Interfaces
         int Update(Customer cust);
         int Delete(int id);
         List<Customer> FindCustomer(string cust);
-
         }
 }

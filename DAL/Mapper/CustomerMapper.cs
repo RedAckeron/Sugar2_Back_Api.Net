@@ -1,4 +1,5 @@
 ﻿using DAL.Models;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -30,7 +31,20 @@ namespace DAL.Mapper
 				DtIn = DateTime.Now
 
 			};
-
+        }
+	public static CustomerAdresse DataToCustomerAdresse(this IDataRecord reader)
+		{
+			return new CustomerAdresse()
+			{
+				Id = (int)reader["id"],
+				IdCustomer= (int)reader["IdCustomer"],
+				AdrInfo = (string)reader["AdrInfo"],
+				AdrRue = (string)reader["AdrInfo"],
+				AdrNo = (string)reader["AdrInfo"],
+				AdrVille = (string)reader["AdrInfo"],
+				AdrCp = (string)reader["AdrInfo"],
+				AdrPays = (string)reader["AdrInfo"]
+			};
         }
 	}
 }

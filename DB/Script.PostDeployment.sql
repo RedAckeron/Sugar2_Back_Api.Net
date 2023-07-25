@@ -24,35 +24,21 @@ exec SP_Log_Create
 @AddByUser=1,
 @Msg='Creation de l utilisateur David De Vilder';
 
-exec SP_Customer_Create
-@FirstName='Jean',
-@LastName='Brouille',
-@AddByUser=1;
 
-exec SP_Log_Create
-@Priority =1,
-@AddByUser=1,
-@Msg='Creation du client Jean Brouille';
+--Creation de 3 clients avec leur adresse 
+exec SP_Customer_Create @FirstName='Jean', @LastName='Brouille', @AddByUser=1;
+exec Sp_CustomerAdresse_Create @IdCustomer=1,@AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=10, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
+exec SP_Log_Create @Priority =1, @AddByUser=1, @Msg='Creation du client Jean Brouille';
 
-exec SP_Customer_Create
-@FirstName='Jerry',
-@LastName='Khan',
-@AddByUser=1;
+exec SP_Customer_Create @FirstName='Jerry', @LastName='Khan', @AddByUser=1;
+exec Sp_CustomerAdresse_Create @IdCustomer=2,@AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=12, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
+exec SP_Log_Create @Priority =1, @AddByUser=1, @Msg='Creation du client Jerry Khan';
 
-exec SP_Log_Create
-@Priority =1,
-@AddByUser=1,
-@Msg='Creation du client Jerry Khan';
+exec SP_Customer_Create @FirstName='Jeanne', @LastName='Dark', @AddByUser=1
+exec Sp_CustomerAdresse_Create @IdCustomer=3,@AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=14, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
+exec SP_Log_Create @Priority =1, @AddByUser=1, @Msg='Creation du client Jeanne Dark';
 
-exec SP_Customer_Create
-@FirstName='Jeanne',
-@LastName='Dark',
-@AddByUser=1
 
-exec SP_Log_Create
-@Priority =1,
-@AddByUser=1,
-@Msg='Creation du client Jeanne Dark';
 
 exec SP_Item_Create
 @Label='Disque dur SSD 250 GB',

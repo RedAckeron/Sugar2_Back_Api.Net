@@ -28,6 +28,8 @@ builder.Services.AddScoped<IItemRepo, ItemRepo>();
 builder.Services.AddScoped<ICmdService, CmdService>();
 builder.Services.AddScoped<ICmdRepo,CmdRepo>();
 
+builder.Services.AddScoped<ICustomerAdresseRepo, CustomerAdresseRepo>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

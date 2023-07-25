@@ -17,17 +17,25 @@ namespace Sugar_Back_V2.Controllers
             _customerService = customerService;
         }
 
+
         [HttpPost("Create")]
         public IActionResult Create(Customer cust)
         {
             return Ok(_customerService.Create(cust));
         }
 
-		[HttpGet("Read/{IdCust}")]
+        [HttpPost("CreateAdresse")]
+        public IActionResult Create(CustomerAdresse CustAdr)
+        {
+            return Ok(_customerService.CreateAdresse(CustAdr));
+        }
+
+        [HttpGet("Read/{IdCust}")]
 		public IActionResult Read(int IdCust)
         {
             return Ok(_customerService.Read(IdCust));
         }
+
 
         [HttpPut("Update")]
         public IActionResult Update(Customer cust)

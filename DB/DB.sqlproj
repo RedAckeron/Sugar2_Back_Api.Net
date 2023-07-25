@@ -64,6 +64,7 @@
     <Folder Include="Procedures\Item\" />
     <Folder Include="Procedures\Log\" />
     <Folder Include="Procedures\Cmd" />
+    <Folder Include="Procedures\CustomerAdresse" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Customer.sql" />
@@ -100,6 +101,9 @@
     <Build Include="Procedures\Cmd\AddItem.sql" />
     <Build Include="Procedures\Customer\FindCustomer.sql" />
     <Build Include="Procedures\Cmd\ReadAllCmdLight.sql" />
+    <Build Include="Tables\CustomerAdresse.sql" />
+    <Build Include="Procedures\CustomerAdresse\Create.sql" />
+    <Build Include="Procedures\CustomerAdresse\Read.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DB.publish.xml" />

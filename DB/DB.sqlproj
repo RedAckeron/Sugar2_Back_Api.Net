@@ -64,7 +64,7 @@
     <Folder Include="Procedures\Item\" />
     <Folder Include="Procedures\Log\" />
     <Folder Include="Procedures\Cmd" />
-    <Folder Include="Procedures\CustomerAdresse" />
+    <Folder Include="Procedures\Address" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Customer.sql" />
@@ -98,12 +98,18 @@
     <Build Include="Procedures\Cmd\Delete.sql" />
     <Build Include="Procedures\Cmd\Login.sql" />
     <Build Include="Procedures\Cmd\Read.sql" />
-    <Build Include="Procedures\Cmd\AddItem.sql" />
     <Build Include="Procedures\Customer\FindCustomer.sql" />
     <Build Include="Procedures\Cmd\ReadAllCmdLight.sql" />
-    <Build Include="Tables\CustomerAdresse.sql" />
-    <Build Include="Procedures\CustomerAdresse\Create.sql" />
-    <Build Include="Procedures\CustomerAdresse\Read.sql" />
+    <Build Include="Tables\Address.sql" />
+    <Build Include="Procedures\Address\CreateCustomerAddress.sql" />
+    <Build Include="Procedures\Address\ReadCustomerAddress.sql" />
+    <Build Include="Procedures\Cmd\AddItemToCmd.sql" />
+    <Build Include="Procedures\Address\Update.sql" />
+    <Build Include="Tables\CustomerAddress.sql" />
+    <Build Include="Procedures\Address\Delete.sql" />
+    <Build Include="Tables\UserAddress.sql" />
+    <Build Include="Procedures\Address\CreateUserAddress.sql" />
+    <Build Include="Procedures\Address\ReadCustomerAllAddress.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DB.publish.xml" />

@@ -17,41 +17,35 @@ namespace Sugar_Back_V2.Controllers
             _customerService = customerService;
         }
 
-
         [HttpPost("Create")]
         public IActionResult Create(Customer cust)
-        {
-            return Ok(_customerService.Create(cust));
-        }
-
-        [HttpPost("CreateAdresse")]
-        public IActionResult Create(CustomerAdresse CustAdr)
-        {
-            return Ok(_customerService.CreateAdresse(CustAdr));
-        }
+            {
+                return Ok(_customerService.Create(cust));
+            }
 
         [HttpGet("Read/{IdCust}")]
 		public IActionResult Read(int IdCust)
-        {
-            return Ok(_customerService.Read(IdCust));
-        }
-
+            {
+                return Ok(_customerService.Read(IdCust));
+            }
 
         [HttpPut("Update")]
         public IActionResult Update(Customer cust)
-        {
-            return Ok(_customerService.Update(cust));
-        }
+            {
+                return Ok(_customerService.Update(cust));
+            }
 
         [HttpPost("Delete/{IdCust}")]
         public IActionResult Delete(int IdCust) 
-        {
-            return Ok(_customerService.Delete(IdCust));
-        }
+            {
+                return Ok(_customerService.Delete(IdCust));
+            }
+
         [HttpGet("FindCustomer/{cust}")]
         public IActionResult FindCustomer(string cust)
         {
             return Ok(_customerService.FindCustomer(cust));
         }
+      
     }
 }

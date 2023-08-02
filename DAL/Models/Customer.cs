@@ -14,7 +14,7 @@ namespace DAL.Models
         public string LastName { get; set; }
         public DateTime DtIn { get; set; }
         public int AddByUser { get; set; }
-        public IEnumerable<CustomerAdresse> Adresses { get; set; }
+        public IEnumerable<CustomerAddress> Adresses { get; set; }
 
     }
 }

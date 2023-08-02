@@ -9,27 +9,22 @@ namespace BLL.Services
     public class CustomerService:ICustomerService
     { 
     private readonly ICustomerRepo _customerRepo;
-    private readonly ICustomerAdresseRepo _customerAdresseRepo;
-    public CustomerService(ICustomerRepo customerRepo, ICustomerAdresseRepo customerAdresseRepo)
+    private readonly IAddressRepo _adresseRepo;
+    public CustomerService(ICustomerRepo customerRepo, IAddressRepo adresseRepo)
     {
         _customerRepo = customerRepo;
-        _customerAdresseRepo= customerAdresseRepo;
+            _adresseRepo = adresseRepo;
     }
-
         
     public int Create(Customer cust)
         {
         return _customerRepo.Create(cust);
         }
 
-        public int CreateAdresse(CustomerAdresse CustAdr)
-        {
-            return _customerAdresseRepo.Create(CustAdr);
-        }
     public Customer Read(int id)
         {
             Customer Cust = _customerRepo.Read(id);
-            Cust.Adresses = _customerAdresseRepo.ReadAllOfCustomer(id);
+            Cust.Adresses = _adresseRepo.ReadCustomerAllAddress(id);
 
             return Cust;
         }
@@ -43,12 +38,10 @@ namespace BLL.Services
            
             return _customerRepo.Delete(id);
         }
-        public List<Customer> FindCustomer(string cust)
+    public List<Customer> FindCustomer(string cust)
         {
             return _customerRepo.FindCustomer(cust);
         }
       
-
-
     }
 }

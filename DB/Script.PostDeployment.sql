@@ -1,45 +1,33 @@
-﻿--insert into [User] (Email,Password,FirstName,LastName,DtIn)values('redackeron@gmail.com','囎ퟔ긋옭ꩈ᪰佮憟ﺺ䴉瀨F⊛䓿⌠汦㎬宐浍湸꥚忒俄㷚퉟�䂧皁','Admin','Admin','2023-06-26T11:49:12.512Z');
---insert into [User] (Email,Password,FirstName,LastName,DtIn)values('devilder.d@gmail.com','囎ퟔ긋옭ꩈ᪰佮憟ﺺ䴉瀨F⊛䓿⌠汦㎬宐浍湸꥚忒俄㷚퉟�䂧皁','David','De Vilder','2023-06-26T11:49:12.512Z');
+﻿--Creation de 3 Utilisateurs avec une adresse
+exec SP_User_Create @LastName='Administrator',@FirstName='Administrator',@Email='redackeron@gmail.com',@Password='strike';
+exec Sp_Address_CreateUserAddress @IdUser=1, @AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=10, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
+exec SP_Log_Create @Priority =3,@AddByUser=1,@Msg='Creation de l utilisateur Administrateur';
 
-exec SP_User_Create 
-@LastName='Administrator',
-@FirstName='Administrator',
-@Email='redackeron@gmail.com',
-@Password='strike';
+exec SP_User_Create @LastName='De Vilder',@FirstName='David',@Email='devilder.d@gmail.com',@Password='strike';
+exec Sp_Address_CreateUserAddress @IdUser=2, @AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=10, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
+exec SP_Log_Create @Priority =1,@AddByUser=1,@Msg='Creation de l utilisateur David De Vilder';
 
-
-exec SP_Log_Create
-@Priority =3,
-@AddByUser=1,
-@Msg='Creation de l utilisateur Administrateur';
-
-exec SP_User_Create 
-@LastName='De Vilder',
-@FirstName='David',
-@Email='devilder.d@gmail.com',
-@Password='strike';
-
-exec SP_Log_Create
-@Priority =1,
-@AddByUser=1,
-@Msg='Creation de l utilisateur David De Vilder';
+exec SP_User_Create @LastName='Test',@FirstName='Test',@Email='test@test.com',@Password='test';
+exec Sp_Address_CreateUserAddress @IdUser=3, @AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=10, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
+exec SP_Log_Create @Priority =1,@AddByUser=1,@Msg='Creation de l utilisateur Test test';
 
 
 --Creation de 3 clients avec leur adresse 
 exec SP_Customer_Create @FirstName='Jean', @LastName='Brouille', @AddByUser=1;
-exec Sp_CustomerAdresse_Create @IdCustomer=1,@AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=10, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
+exec Sp_Address_CreateCustomerAddress @IdCustomer=1, @AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=10, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
+exec Sp_Address_CreateCustomerAddress @IdCustomer=1, @AdrInfo='Travail',@AdrRue='Rue de la defense',@AdrNo=68, @AdrVille='Mons',@AdrCp='5020',@AdrPays='Belgique';
 exec SP_Log_Create @Priority =1, @AddByUser=1, @Msg='Creation du client Jean Brouille';
 
 exec SP_Customer_Create @FirstName='Jerry', @LastName='Khan', @AddByUser=1;
-exec Sp_CustomerAdresse_Create @IdCustomer=2,@AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=12, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
+exec Sp_Address_CreateCustomerAddress @IdCustomer=2,@AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=12, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
 exec SP_Log_Create @Priority =1, @AddByUser=1, @Msg='Creation du client Jerry Khan';
 
 exec SP_Customer_Create @FirstName='Jeanne', @LastName='Dark', @AddByUser=1
-exec Sp_CustomerAdresse_Create @IdCustomer=3,@AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=14, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
+exec Sp_Address_CreateCustomerAddress @IdCustomer=3,@AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=14, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
 exec SP_Log_Create @Priority =1, @AddByUser=1, @Msg='Creation du client Jeanne Dark';
 
 
-
+--creation des items
 exec SP_Item_Create
 @Label='Disque dur SSD 250 GB',
 @Url='www.test.com/disque dur',

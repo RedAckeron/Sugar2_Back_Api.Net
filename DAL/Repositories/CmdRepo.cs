@@ -41,7 +41,7 @@ namespace DAL.Repositories
 					return 0;
 				}
 			}
-			return 0;
+			
 		}
 		#endregion
 		#region Read
@@ -128,7 +128,7 @@ namespace DAL.Repositories
 				dbConnection.Open();
 				try
 				{
-					rows = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Cmd_AddItem", true, new { IdItem, IdCmd, Qt, AddByUser });
+					rows = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Cmd_AddItemToCmd", true, new { IdItem, IdCmd, Qt, AddByUser });
 					TextColor.Write("cmd", "additem", $"Ajoute de {Qt} item {IdItem} dans cmd {IdCmd} OK", "green");
 				}
 				catch (Exception ex)

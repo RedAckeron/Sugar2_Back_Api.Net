@@ -28,7 +28,8 @@ builder.Services.AddScoped<IItemRepo, ItemRepo>();
 builder.Services.AddScoped<ICmdService, CmdService>();
 builder.Services.AddScoped<ICmdRepo,CmdRepo>();
 
-builder.Services.AddScoped<ICustomerAdresseRepo, CustomerAdresseRepo>();
+builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IAddressRepo, AddressRepo>();
 
 var app = builder.Build();
 

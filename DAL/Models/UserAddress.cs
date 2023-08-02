@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace DAL.Models
 
 {
-    public class CustomerAdresse
+    public class UserAddress
     {
         public int Id { get; set; }
-        public int IdCustomer { get; set; }
+        public int IdUser { get; set; }
         public string AdrInfo { get; set; }
         public string AdrRue { get; set; }
         public string AdrNo { get; set; }

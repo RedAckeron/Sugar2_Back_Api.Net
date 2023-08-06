@@ -23,8 +23,8 @@ namespace BLL.Services
 
     public Customer Read(int id)
         {
-            Customer Cust = _customerRepo.Read(id);
-            Cust.Adresses = _adresseRepo.ReadCustomerAllAddress(id);
+           Customer Cust = _customerRepo.Read(id);
+           Cust.Adresses = _adresseRepo.ReadCustomerAllAddress(id);
 
             return Cust;
         }

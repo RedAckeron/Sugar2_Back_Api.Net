@@ -5,8 +5,8 @@
 	[FirstName] nvarchar(50) default(null),
 	[LastName] nvarchar(100) default(null),
 	[Email] nvarchar(300) default(null),
-	[call1] nvarchar(50) default(null),
-	[call2] nvarchar(50) default(null),
+	[Call1] nvarchar(50) default(null),
+	[Call2] nvarchar(50) default(null),
 	[DtIn] datetime not null,
 	[AddByUser] int not null,
 	    CONSTRAINT [FK_AddByUser] FOREIGN KEY ([AddByUser]) REFERENCES [dbo].[User] ([Id])

@@ -32,7 +32,7 @@ namespace DAL.Repositories
 				try
 				{
 					int rows = 0;
-					rows = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Customer_Create", true, new { C.FirstName,C.LastName, C.AddByUser });
+					rows = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Customer_Create", true, new { C.FirstName, C.LastName, C.Email,C.Call1,C.Call2, C.AddByUser });
 					DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Log_Create", true, new { Priority = 2, AddByUser = 1, Msg = $"Creation du customer {C.FirstName} {C.LastName}" });
 
 					TextColor.Write("customer", "create", $"Creation du customer {C.FirstName} {C.LastName}" , "green");

@@ -13,16 +13,16 @@ exec SP_Log_Create @Priority =1,@AddByUser=1,@Msg='Creation de l utilisateur Tes
 
 
 --Creation de 3 clients avec leur adresse 
-exec SP_Customer_Create @FirstName='Jean', @LastName='Brouille', @AddByUser=1;
+exec SP_Customer_Create @FirstName='Jean', @LastName='Brouille', @Email='jb@skynet.be',@Call1='0494568745',@Call2='0497878485',@AddByUser=1;
 exec Sp_Address_CreateCustomerAddress @IdCustomer=1, @AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=10, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
 exec Sp_Address_CreateCustomerAddress @IdCustomer=1, @AdrInfo='Travail',@AdrRue='Rue de la defense',@AdrNo=68, @AdrVille='Mons',@AdrCp='5020',@AdrPays='Belgique';
 exec SP_Log_Create @Priority =1, @AddByUser=1, @Msg='Creation du client Jean Brouille';
 
-exec SP_Customer_Create @FirstName='Jerry', @LastName='Khan', @AddByUser=1;
+exec SP_Customer_Create @FirstName='Jerry', @LastName='Khan',@Email='jb@skynet.be',@Call1='0494568745',@Call2='0497878485',@AddByUser=1;
 exec Sp_Address_CreateCustomerAddress @IdCustomer=2,@AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=12, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
 exec SP_Log_Create @Priority =1, @AddByUser=1, @Msg='Creation du client Jerry Khan';
 
-exec SP_Customer_Create @FirstName='Jeanne', @LastName='Dark', @AddByUser=1
+exec SP_Customer_Create @FirstName='Jeanne', @LastName='Dark',@Email='jb@skynet.be',@Call1='0494568745',@Call2='0497878485',@AddByUser=1;
 exec Sp_Address_CreateCustomerAddress @IdCustomer=3,@AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=14, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
 exec SP_Log_Create @Priority =1, @AddByUser=1, @Msg='Creation du client Jeanne Dark';
 

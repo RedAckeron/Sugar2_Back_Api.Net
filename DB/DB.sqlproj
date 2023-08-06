@@ -90,7 +90,6 @@
     <Build Include="Procedures\Item\Delete.sql" />
     <Build Include="Procedures\Item\Read.sql" />
     <Build Include="Procedures\Item\Update.sql" />
-    <Build Include="Procedures\Log\Create.sql" />
     <Build Include="Tables\ItemHistory.sql" />
     <Build Include="Tables\CustomerHistory.sql" />
     <Build Include="Procedures\Cmd\Update.sql" />
@@ -110,6 +109,7 @@
     <Build Include="Tables\UserAddress.sql" />
     <Build Include="Procedures\Address\CreateUserAddress.sql" />
     <Build Include="Procedures\Address\ReadCustomerAllAddress.sql" />
+    <Build Include="Procedures\Log\Create.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DB.publish.xml" />

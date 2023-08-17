@@ -2,11 +2,13 @@
 	@LastName NVARCHAR(50), 
     @FirstName NVARCHAR(50), 
     @Email NVARCHAR(384), 
-    @Password NVARCHAR(20)
+    @Password NVARCHAR(50)
    
 AS
 BEGIN
-    declare @DtIn datetime2 = GETDATE();
+    declare 
+    @DtIn datetime2 = GETDATE();
+  
     /*
         Test de valeurs
     */

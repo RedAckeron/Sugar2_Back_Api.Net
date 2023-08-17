@@ -12,9 +12,9 @@ namespace DAL.Mapper
 {
     public static class UserMapper
     {
-		public static User DataToUser(this IDataRecord reader)
+		public static UserDal DataToUser(this IDataRecord reader)
 		{
-            return new User()
+            return new UserDal()
             {
             Id = (int)reader["id"],
             Email=(string)reader["Email"],

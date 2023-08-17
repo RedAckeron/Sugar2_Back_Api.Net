@@ -1,15 +1,17 @@
-﻿using DAL.Models;
+﻿using BLL.Models;
+using DAL.Models;
 
 namespace BLL.Interfaces
 {
     public interface IUserService
     {
-        int Create(User User);
-        User Read(int IdUser);
-        User Login(string Email, string Passwd);
-        int Update(User User);
+        int Create(UserBll UserBll);
+        UserDal Read(int IdUser);
+        UserDal Login(string Email, string Passwd);
+        int Update(UserDal User);
         bool Enable(int IdUser);
         bool Disable(int IdUser);
         int Delete(int IdUser);
+        int InsertRefreshToken(string email,string refreshToken,DateTime validite);
         }
 }

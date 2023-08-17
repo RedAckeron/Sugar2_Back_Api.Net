@@ -22,7 +22,7 @@ namespace DAL.Repositories
         }
         
         #region CREATE
-        public int Create(User U)
+        public int Create(UserDal U)
 		{
             using (IDbConnection dbConnection = new SqlConnection(_connectionString))
             {
@@ -46,9 +46,9 @@ namespace DAL.Repositories
         #endregion
         
         #region READ
-        public User? Read(int IdUser)
+        public UserDal? Read(int IdUser)
 		{
-            User user = null;
+            UserDal user = null;
             try
             {
                 using (IDbConnection dbConnection = new SqlConnection(_connectionString))
@@ -72,9 +72,9 @@ namespace DAL.Repositories
         #endregion
         
         #region LOGIN
-        public User? Login(string Email, string Passwd)
+        public UserDal? Login(string Email, string Passwd)
 			{
-            User user = null;
+            UserDal user = null;
             try
             {
                 using (IDbConnection dbConnection = new SqlConnection(_connectionString))
@@ -94,7 +94,7 @@ namespace DAL.Repositories
         #endregion
         
         #region UPDATE
-        public int Update(User U)
+        public int Update(UserDal U)
 		{
             using (IDbConnection dbConnection = new SqlConnection(_connectionString))
             {
@@ -114,7 +114,7 @@ namespace DAL.Repositories
 			}
 		}
         #endregion
-        
+
         public bool Enable(int IdUser)
         {
             using (IDbConnection dbConnection = new SqlConnection(_connectionString))
@@ -176,6 +176,26 @@ namespace DAL.Repositories
                 catch (Exception ex)
                 {
                     TextColor.Write("user", "create", ex.Message, "Error");
+                    return 0;
+                }
+            }
+        }
+
+        public int InsertFrefreshToken(string email, string refreshToken, DateTime validite)
+        {
+            using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+            {
+                dbConnection.Open();
+                try
+                {
+                    int result = 0;
+                    result = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "[InsertRefreshToken", true, new { email,refreshToken, validite }) ;
+                    TextColor.Write("user", "Token", "User Delete " + result + " OK", "Succes");
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    TextColor.Write("user", "Token", ex.Message, "Error");
                     return 0;
                 }
             }

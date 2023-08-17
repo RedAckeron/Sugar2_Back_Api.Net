@@ -1,30 +1,31 @@
 ﻿using BLL.Interfaces;
+using BLL.Models;
+using BLL.Mapper;
 using DAL.Interfaces;
 using DAL.Models;
 
 namespace BLL.Services
 {
     public class UserService:IUserService
-    { 
+    {
     private readonly IUserRepo _userRepo;
     public UserService(IUserRepo userRepo)
     {
         _userRepo = userRepo;
     }
-        
-    public int Create(User User)
+    public int Create(UserBll userBll)
         {
-            return _userRepo.Create(User);
+            return _userRepo.Create(UserBllMapper.UserBllToUserDal(userBll));
         }
-    public User Read(int IdUser)
+    public UserDal Read(int IdUser)
         {
             return _userRepo.Read(IdUser);
         }
-    public User Login(string email,string passwd)
+    public UserDal Login(string email,string passwd)
         {
             return _userRepo.Login(email, passwd);
         }
-    public int Update(User User) 
+    public int Update(UserDal User) 
         {
             return _userRepo.Update(User);
         }
@@ -40,5 +41,11 @@ namespace BLL.Services
         {
             return _userRepo.Delete(IdUser);
         }
+        public int InsertRefreshToken(string email,string refreshToken,DateTime validite)
+        { 
+        return _userRepo.InsertFrefreshToken(email, refreshToken, validite);
+        }
+
+
     }
 }

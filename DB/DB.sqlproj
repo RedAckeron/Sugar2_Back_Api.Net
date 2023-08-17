@@ -9,8 +9,7 @@
     <ProjectGuid>{cfdecdfc-0ef4-4ca2-9d07-728988d6a71c}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
-    <RootPath>
-    </RootPath>
+    <RootPath />
     <RootNamespace>DB</RootNamespace>
     <AssemblyName>DB</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
@@ -48,7 +47,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
-    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
     <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
     <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
   </PropertyGroup>
@@ -65,6 +63,7 @@
     <Folder Include="Procedures\Log\" />
     <Folder Include="Procedures\Cmd" />
     <Folder Include="Procedures\Address" />
+    <Folder Include="Procedures\Auth" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Customer.sql" />
@@ -110,6 +109,9 @@
     <Build Include="Procedures\Address\CreateUserAddress.sql" />
     <Build Include="Procedures\Address\ReadCustomerAllAddress.sql" />
     <Build Include="Procedures\Log\Create.sql" />
+    <Build Include="Procedures\Auth\register.sql" />
+    <Build Include="Functions\F_hasher.sql" />
+    <Build Include="Procedures\Auth\InsertRefreshToken.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DB.publish.xml" />

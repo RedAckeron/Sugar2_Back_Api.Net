@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    public class User
+    public class UserDal
     {
      /*
         public User(int id, string email, string password, string firstName, string lastName, DateTime dtIn)

@@ -1,5 +1,5 @@
 ﻿--Creation de 3 Utilisateurs avec une adresse
-exec SP_User_Create @LastName='Administrator',@FirstName='Administrator',@Email='redackeron@gmail.com',@Password='strike';
+exec SP_User_Create @LastName='Administrator',@FirstName='Administrator',@Email='redackeron@gmail.com',@Password='G@mal0sada';
 exec Sp_Address_CreateUserAddress @IdUser=1, @AdrInfo='Domicile',@AdrRue='Avenue des oiseaux',@AdrNo=10, @AdrVille='Bruxelles',@AdrCp='1000',@AdrPays='Belgique';
 exec SP_Log_Create @Priority =3,@AddByUser=1,@Msg='Creation de l utilisateur Administrateur';
 

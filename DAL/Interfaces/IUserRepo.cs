@@ -11,7 +11,7 @@ namespace DAL.Interfaces
     {
         int Create(UserDal Userdal);
         UserDal Read(int id);
-        UserDal Login(string email, string passwd);
+        UserDal Login(UserDal Userdal);
         int Update(UserDal cust);
         bool Enable(int IdUser);
         bool Disable(int IdUser);

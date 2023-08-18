@@ -32,38 +32,8 @@ namespace Sugar_Back_V2.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest("Model form non valide");
+                return BadRequest();
             }
-
-            try
-            {
-            //on verifie que le mail est bien formaté et apres on continue
-            MailAddress Email = new MailAddress(UserForm.Email);
-            }
-            catch (FormatException)
-            {
-                return BadRequest("Le mail n est pas bien formaté");
-            }
-
-            try
-            { //on verifie que le password match avec la regex
-
-
-
-                RegularExpressionAttribute = new RegularExpressionAttribute("email");
-                Regex validateGuidRegex = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
-                if (!validateGuidRegex.IsMatch(UserForm.Password)) throw new FormatException("Format du password nok");
-            }
-            catch (FormatException)
-            {
-                return BadRequest("Le password n est pas bien formaté");
-            }
-
-
-
-
-
-
 
             UserBll userBll = new UserBll()
             {
@@ -72,16 +42,24 @@ namespace Sugar_Back_V2.Controllers
                 FirstName = UserForm.FirsName,
                 LastName = UserForm.FirsName,
             };
-            _userService.Create(userBll);
-
-            return Ok();
+            return Ok(_userService.Create(userBll));
         }
 
-
         [HttpPost("Login")]
-        public IActionResult Read(LoginForm form)
+        public IActionResult Read(LoginForm LoginForm)
         {
-            return Ok(_userService.Login(form.Email,form.Password));
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            UserBll userBll = new UserBll()
+            {
+                Email = LoginForm.Email,
+                Password = LoginForm.Password,
+                FirstName = "",
+                LastName = "",
+            };
+            return Ok(_userService.Login(userBll));
         }
 
         [HttpGet("Read/{IdUser}")]

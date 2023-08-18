@@ -7,7 +7,7 @@ namespace BLL.Interfaces
     {
         int Create(UserBll UserBll);
         UserDal Read(int IdUser);
-        UserDal Login(string Email, string Passwd);
+        UserDal Login(UserBll UserBll);
         int Update(UserDal User);
         bool Enable(int IdUser);
         bool Disable(int IdUser);

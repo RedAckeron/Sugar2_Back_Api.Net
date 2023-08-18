@@ -72,7 +72,7 @@ namespace DAL.Repositories
         #endregion
         
         #region LOGIN
-        public UserDal? Login(string Email, string Passwd)
+        public UserDal? Login(UserDal userDal)
 			{
             UserDal user = null;
             try
@@ -80,7 +80,7 @@ namespace DAL.Repositories
                 using (IDbConnection dbConnection = new SqlConnection(_connectionString))
                 {
                     dbConnection.Open();
-                    user = dbConnection.ExecuteReader("SP_User_Login", dr => dr.DataToUser(), true, new { Email=Email, Password=Passwd }).SingleOrDefault();
+                    user = dbConnection.ExecuteReader("SP_User_Login", dr => dr.DataToUser(), true, new { Email=userDal.Email, Password=userDal.Password }).SingleOrDefault();
                     if (user != null) TextColor.Write("user", "login", $"User {user.Email} : OK", "green"); 
 					else TextColor.Write("user", "login", "User est null", "red");
                 }

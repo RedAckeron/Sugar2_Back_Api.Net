@@ -21,9 +21,9 @@ namespace BLL.Services
         {
             return _userRepo.Read(IdUser);
         }
-    public UserDal Login(string email,string passwd)
+    public UserDal Login(UserBll userBll)
         {
-            return _userRepo.Login(email, passwd);
+            return _userRepo.Login(UserBllMapper.UserBllToUserDal(userBll));
         }
     public int Update(UserDal User) 
         {

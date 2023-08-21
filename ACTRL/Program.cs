@@ -3,6 +3,7 @@ using BLL.Services;
 using DAL.Interfaces;
 using DAL.Repositories;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +18,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IDbConnection>(sp => new SqlConnection(configuration.GetConnectionString("default")));
+string databaseAddress=Environment.GetEnvironmentVariable("DB_HOST");
+
+builder.Services.AddSingleton<IDbConnection>(sp => new SqlConnection(configuration.GetConnectionString("default").Replace("[DB_HOST]", databaseAddress)));
+
+
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();

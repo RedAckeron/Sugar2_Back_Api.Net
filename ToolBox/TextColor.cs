@@ -29,37 +29,37 @@ namespace ToolBox
 			switch (ctrl.ToLower())
 			{
 
-			case "user":Controller = "║USER      ║"; break;
-			case "customer": Controller = "║CUSTOMER  ║"; break;
-			case "item": Controller = "║ITEM      ║"; break;
-			case "cmd": Controller = "║COMMAND   ║"; break;
-			case "odp": Controller = "║ODP       ║"; break;
+			case "user":Controller = "║USER        ║"; break;
+			case "customer": Controller = "║CUSTOMER    ║"; break;
+			case "item": Controller = "║ITEM        ║"; break;
+			case "cmd": Controller = "║COMMAND     ║"; break;
+			case "odp": Controller = "║ODP         ║"; break;
 
 				default:
 				{
 					if (ctrl.Length <= 10)
 					{
 						Controller = "║" + ctrl;
-						for (int i = ctrl.Length; i < 10; i++) ctrl += " ";
+						for (int i = ctrl.Length; i < 12; i++) ctrl += " ";
 						Controller += ("║");
 					}
 					else
 					{
-						Controller = "║" + ctrl.Substring(0, 10) + "║";
+						Controller = "║" + ctrl.Substring(0, 12) + "║";
 					}
 				} break;
 			}
 
 			switch (verb.ToLower())
 			{
-				case "create": Verbe = "CREATE      ║"; break;
-				case "read": Verbe = "READ        ║"; break;
-				case "update": Verbe = "UPDATE      ║"; break;
-				case "delete": Verbe = "DELETE      ║"; break;
-                case "login": Verbe = "LOGIN       ║"; break;
-                case "findcustomer": Verbe = "FINDCUSTOMER║"; break;
+				case "create": Verbe = "CREATE         ║"; break;
+				case "read": Verbe = "READ           ║"; break;
+				case "update": Verbe = "UPDATE         ║"; break;
+				case "delete": Verbe = "DELETE         ║"; break;
+                case "login": Verbe = "LOGIN          ║"; break;
+                case "findcustomer": Verbe = "FINDCUSTOMER   ║"; break;
 
-                default: Verbe = "UNKNOWN   ║"; break;
+                default: Verbe = "UNKNOWN        ║"; break;
 			}
 
 			switch (color.ToLower())

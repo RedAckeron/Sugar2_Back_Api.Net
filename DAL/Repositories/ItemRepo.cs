@@ -53,7 +53,10 @@ namespace DAL.Repositories
 				using (IDbConnection dbConnection = new SqlConnection(_connectionString))
 				{
 					dbConnection.Open();
-					return dbConnection.ExecuteReader("SP_Item_Read", dr => dr.DataToItem(), true, new { IdItem=IdItem}).SingleOrDefault();
+                    Item item;
+                    item = dbConnection.ExecuteReader("SP_Item_Read", dr => dr.DataToItem(), true, new { IdItem = IdItem }).SingleOrDefault();
+                    TextColor.Write("item", "Read", $"Lecture de Item {item.Label}", "green");
+					return item;
 				}
 			}
 			catch (Exception ex)

@@ -22,8 +22,6 @@ string databaseAddress=Environment.GetEnvironmentVariable("DB_HOST");
 
 builder.Services.AddSingleton<IDbConnection>(sp => new SqlConnection(configuration.GetConnectionString("default").Replace("[DB_HOST]", databaseAddress)));
 
-
-
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 

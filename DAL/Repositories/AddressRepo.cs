@@ -57,10 +57,17 @@ namespace DAL.Repositories
             {
                 using (IDbConnection dbConnection = new SqlConnection(_connectionString))
                 {
-                    dbConnection.Open();
-                    CA = dbConnection.ExecuteReader("SP_Address_ReadCustomerAddress", dr => dr.DataToCustomerAdresse(), true, new { IdAdr }).SingleOrDefault();
-                    TextColor.Write("Address", "read", $"Lecture de l adresse {CA.AdrInfo} du client {CA.IdCustomer}", "green");
-                    return CA;
+                    try 
+                    {
+                        dbConnection.Open();
+                        CA = dbConnection.ExecuteReader("SP_Address_ReadCustomerAddress", dr => dr.DataToCustomerAdresse(), true, new { IdAdr }).SingleOrDefault();
+                        TextColor.Write("Address", "read", $"Lecture de l adresse {CA.AdrInfo} du client {CA.IdCustomer}", "green");
+                        return CA;
+                    }
+                    catch (Exception ex)
+                    {
+                        TextColor.Write("Address", "read", ex.Message, "orange");
+                    }
                 }
             }
             catch (Exception ex)

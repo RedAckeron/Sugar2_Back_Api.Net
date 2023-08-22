@@ -23,8 +23,8 @@ namespace BLL.Services
 
     public Customer Read(int id)
         {
-           Customer Cust = _customerRepo.Read(id);
-           Cust.Adresses = _adresseRepo.ReadCustomerAllAddress(id);
+        Customer Cust = _customerRepo.Read(id);
+        if (Cust!=null)Cust.Adresses = _adresseRepo.ReadCustomerAllAddress(id);
 
             return Cust;
         }
@@ -42,6 +42,9 @@ namespace BLL.Services
         {
             return _customerRepo.FindCustomer(cust);
         }
-      
+    public List<Customer> ReadLastCustomer()
+        {
+            return _customerRepo.ReadLastCustomer();
+        }
     }
 }

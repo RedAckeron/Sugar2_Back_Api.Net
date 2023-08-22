@@ -31,12 +31,14 @@ namespace DAL.Repositories
 				dbConnection.Open();
 				try
 				{
-					int rows = 0;
-					rows = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Customer_Create", true, new { C.FirstName, C.LastName, C.Email,C.Call1,C.Call2, C.AddByUser });
+					object result=null;
+                    // public static object? ExecuteScalar(this IDbConnection connection, string query, bool isStoredProcedure = false, object? parameters = null)
+
+                    result = DbConnectionExtensions.ExecuteScalar(dbConnection, "SP_Customer_Create", true, new { C.FirstName, C.LastName, C.Email, C.Call1, C.Call2, C.AddByUser });
 					DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Log_Create", true, new { Priority = 2, AddByUser = 1, Msg = $"Creation du customer {C.FirstName} {C.LastName}" });
 
-					TextColor.Write("customer", "create", $"Creation du customer {C.FirstName} {C.LastName}" , "green");
-					return rows;
+					TextColor.Write("customer", "create", $"Creation du customer {C.FirstName} {C.LastName} ID: {(int)result}" , "green");
+					return (int)result;
 				}
 				catch (Exception ex)
 				{
@@ -136,6 +138,41 @@ namespace DAL.Repositories
 
 		}
         #endregion
+    #region ReadLastCustomer
+        public List<Customer> ReadLastCustomer()
+        {
+            List<Customer> Customers = new List<Customer>();
+            try
+            {
+                using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+                {
+                    using (SqlConnection cnx = new SqlConnection(_connectionString))
+                    {
+                        using (SqlCommand cmd = cnx.CreateCommand())
+                        {
+                            cmd.CommandText = $"Exec SP_Customer_ReadLastCustomer;";
+                            //cmd.Parameters.AddWithValue("cust", @cust);
 
+                            cnx.Open();
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    Customers.Add(CustomerMapper.DataToFindCustomer(reader));
+								}
+                                TextColor.Write("customer", "ReadLastCustomer", $"Récuperation des 20 derniers clients encodé", "green");
+
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TextColor.Write("customer", "FindCustomer", ex.Message, "orange");
+            }
+            return Customers;
+        }
+        #endregion
     }
 }

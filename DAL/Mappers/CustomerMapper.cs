@@ -11,9 +11,9 @@ namespace DAL.Mapper
 {
 	public static class CustomerMapper
 	{
-	public static Customer DataToCustomer(this IDataRecord reader)
+	public static CustomerDal DataToCustomer(this IDataRecord reader)
 		{
-			return new Customer()
+			return new CustomerDal()
 			{
 				Id = (int)reader["id"],
 				FirstName = (string)reader["FirstName"],
@@ -21,9 +21,9 @@ namespace DAL.Mapper
 				DtIn = (DateTime)reader["DtIn"]
 			};
 		}
-	public static Customer DataToFindCustomer(this IDataRecord reader) 
+	public static CustomerDal DataToFindCustomer(this IDataRecord reader) 
 		{
-			return new Customer()
+			return new CustomerDal()
 			{
 				Id = (int)reader["id"],
 				FirstName = (string)reader["FirstName"],

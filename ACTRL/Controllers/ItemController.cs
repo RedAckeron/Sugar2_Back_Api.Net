@@ -18,7 +18,7 @@ namespace Sugar_Back_V2.Controllers
         }
 
         [HttpPost("Create")]
-        public IActionResult Create(Item Item)
+        public IActionResult Create(ItemDal Item)
         {
             return Ok(_itemService.Create(Item));
         }
@@ -37,7 +37,7 @@ namespace Sugar_Back_V2.Controllers
 		}
 
 		[HttpPut("Update")]
-        public IActionResult Update(Item Item)
+        public IActionResult Update(ItemDal Item)
         {
             return Ok(_itemService.Update(Item));
         }

@@ -1,6 +1,6 @@
 ﻿using BLL.Interfaces;
 using BLL.Models;
-using BLL.Mapper;
+using BLL.Mappers;
 using DAL.Interfaces;
 using DAL.Models;
 
@@ -15,7 +15,7 @@ namespace BLL.Services
     }
     public int Create(UserBll userBll)
         {
-            return _userRepo.Create(UserBllMapper.UserBllToUserDal(userBll));
+            return _userRepo.Create(UserServiceMapper.UserBllToUserDal(userBll));
         }
     public UserDal Read(int IdUser)
         {
@@ -23,7 +23,7 @@ namespace BLL.Services
         }
     public UserDal Login(UserBll userBll)
         {
-            return _userRepo.Login(UserBllMapper.UserBllToUserDal(userBll));
+            return _userRepo.Login(UserServiceMapper.UserBllToUserDal(userBll));
         }
     public int Update(UserDal User) 
         {

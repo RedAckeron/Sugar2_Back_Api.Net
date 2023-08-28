@@ -5,15 +5,15 @@ namespace BLL.Interfaces
 {
     public interface IAddressService
     {
-    int CreateCustomerAddress(CustomerAddress Adr);
-    CustomerAddress ReadCustomerAddress(int idAdr);
-    List<CustomerAddress> ReadCustomerAllAddress(int idCust);
-    int UpdateCustomerAddress(CustomerAddress Adr);
+    int CreateCustomerAddress(CustomerAddressDal Adr);
+    CustomerAddressDal ReadCustomerAddress(int idAdr);
+    List<CustomerAddressDal> ReadCustomerAllAddress(int idCust);
+    int UpdateCustomerAddress(CustomerAddressDal Adr);
     int DeleteCustomerAddress(int id_Adr);
 
-    int CreateUserAddress(UserAddress Adr);
-    UserAddress ReadUserAddress(int id_Adr);
-    int UpdateUserAddress(UserAddress Adr);
+    int CreateUserAddress(UserAddressDal Adr);
+    UserAddressDal ReadUserAddress(int id_Adr);
+    int UpdateUserAddress(UserAddressDal Adr);
     int DeleteUserAddress(int id_Adr);
     }
 }

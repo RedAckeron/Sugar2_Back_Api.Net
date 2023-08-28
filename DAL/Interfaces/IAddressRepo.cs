@@ -9,15 +9,15 @@ namespace DAL.Interfaces
 {
     public interface IAddressRepo
     {
-        int CreateCustomerAddress(CustomerAddress Adr);
-        CustomerAddress ReadCustomerAddress(int IdAdr);
-        List<CustomerAddress> ReadCustomerAllAddress(int IdCustomer);
-        int UpdateCustomerAddress(CustomerAddress Adr);
+        int CreateCustomerAddress(CustomerAddressDal Adr);
+        CustomerAddressDal ReadCustomerAddress(int IdAdr);
+        List<CustomerAddressDal> ReadCustomerAllAddress(int IdCustomer);
+        int UpdateCustomerAddress(CustomerAddressDal Adr);
         int DeleteCustomerAddress(int IdAdr);
-        int CreateUserAddress(UserAddress Adr);
-        UserAddress ReadUserAddress(int IdAdr);
-        List<UserAddress> ReadAllOfUserAddress(int IdUser);
-        int UpdateUserAddress(UserAddress Adr);
+        int CreateUserAddress(UserAddressDal Adr);
+        UserAddressDal ReadUserAddress(int IdAdr);
+        List<UserAddressDal> ReadAllOfUserAddress(int IdUser);
+        int UpdateUserAddress(UserAddressDal Adr);
         int DeleteUserAddress(int IdAdr);
     }
 }

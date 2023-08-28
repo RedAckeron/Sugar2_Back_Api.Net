@@ -7,11 +7,17 @@ using System.Threading.Tasks;
 namespace DAL.Models
 
 {
-    public class Odp
+    public class OdpDal
     {
         public int Id { get; set; }
-        public string AddByUser { get; set; }
-        public string IdCustomer { get; set; }
+        public int AddByUser { get; set; }
+        public int IdCustomer { get; set; }
         public DateTime DtIn{ get; set; }
+    }
+    public class OdpDalLight
+    {
+        public int Id { get; set; }
+        public DateTime DtIn { get; set; }
+
     }
 }

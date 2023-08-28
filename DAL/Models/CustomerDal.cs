@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DAL.Models
 
 {
-    public class Customer
+    public class CustomerDal
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -17,7 +17,7 @@ namespace DAL.Models
         public string Call2 { get; set; }
         public DateTime DtIn { get; set; }
         public int AddByUser { get; set; }
-        public IEnumerable<CustomerAddress> Adresses { get; set; }
+        public IEnumerable<CustomerAddressDal> Adresses { get; set; }
 
     }
 }

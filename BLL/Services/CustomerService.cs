@@ -1,4 +1,6 @@
 ﻿using BLL.Interfaces;
+using BLL.Mappers;
+using BLL.Models;
 using DAL.Interfaces;
 using DAL.Models;
 using Microsoft.Data.SqlClient;
@@ -16,19 +18,19 @@ namespace BLL.Services
             _adresseRepo = adresseRepo;
     }
         
-    public int Create(Customer cust)
+    public int Create(CustomerDal cust)
         {
         return _customerRepo.Create(cust);
         }
 
-    public Customer Read(int id)
+    public CustomerDal Read(int id)
         {
-        Customer Cust = _customerRepo.Read(id);
+        CustomerDal Cust = _customerRepo.Read(id);
         if (Cust!=null)Cust.Adresses = _adresseRepo.ReadCustomerAllAddress(id);
 
             return Cust;
         }
-    public int Update(Customer cust) 
+    public int Update(CustomerDal cust) 
         {
            
             return _customerRepo.Update(cust);
@@ -38,13 +40,17 @@ namespace BLL.Services
            
             return _customerRepo.Delete(id);
         }
-    public List<Customer> FindCustomer(string cust)
+    public List<CustomerDal> FindCustomer(string cust)
         {
             return _customerRepo.FindCustomer(cust);
         }
-    public List<Customer> ReadLastCustomer()
+    public List<CustomerDal> ReadLastCustomer()
         {
             return _customerRepo.ReadLastCustomer();
+        }
+        public CustomerSummaryBll ReadCustomerSummary(int IdCust)
+        {
+            return CustomerSummaryMapper.CustomerSummaryDalToCustomerSummaryBll(_customerRepo.ReadCustomerSummary(IdCust));
         }
     }
 }

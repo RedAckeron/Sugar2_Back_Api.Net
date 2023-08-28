@@ -1,14 +1,16 @@
-﻿using DAL.Models;
+﻿using BLL.Models;
+using DAL.Models;
 
 namespace BLL.Interfaces
 {
     public interface ICustomerService
     {
-    int Create(Customer cust);
-    Customer Read(int id_cust);
-    int Update(Customer cust);
+    int Create(CustomerDal cust);
+    CustomerDal Read(int id_cust);
+    int Update(CustomerDal cust);
     int Delete(int id);
-    List<Customer> FindCustomer(string cust);
-    List<Customer> ReadLastCustomer();
+    List<CustomerDal> FindCustomer(string cust);
+    List<CustomerDal> ReadLastCustomer();
+    CustomerSummaryBll ReadCustomerSummary(int IdCust);
     }
 }

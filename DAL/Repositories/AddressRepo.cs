@@ -26,7 +26,7 @@ namespace DAL.Repositories
 
 
 	#region CreateCustomerAddress
-		public int CreateCustomerAddress(CustomerAddress CA)
+		public int CreateCustomerAddress(CustomerAddressDal CA)
 		{
 			using (IDbConnection dbConnection = new SqlConnection(_connectionString))
 			{
@@ -50,9 +50,9 @@ namespace DAL.Repositories
         #endregion
 
     #region ReadCustomerAddress
-        public CustomerAddress ReadCustomerAddress(int IdAdr)
+        public CustomerAddressDal ReadCustomerAddress(int IdAdr)
 			{
-            CustomerAddress CA = null;
+            CustomerAddressDal CA = null;
             try
             {
                 using (IDbConnection dbConnection = new SqlConnection(_connectionString))
@@ -79,9 +79,9 @@ namespace DAL.Repositories
 	#endregion
 
 	#region ReadCustomerAllAddress
-		public List<CustomerAddress> ReadCustomerAllAddress(int IdCust)
+		public List<CustomerAddressDal> ReadCustomerAllAddress(int IdCust)
         {
-            List<CustomerAddress> CustomerAdresses = new List<CustomerAddress>();
+            List<CustomerAddressDal> CustomerAdresses = new List<CustomerAddressDal>();
             try
             {
                 using (IDbConnection dbConnection = new SqlConnection(_connectionString))
@@ -118,7 +118,7 @@ namespace DAL.Repositories
     #endregion
     
 	#region UpdateCustomerAddress
-        public int UpdateCustomerAddress(CustomerAddress CA)
+        public int UpdateCustomerAddress(CustomerAddressDal CA)
 		{
 			using (IDbConnection dbConnection = new SqlConnection(_connectionString))
 			{
@@ -149,7 +149,7 @@ namespace DAL.Repositories
 
 
     #region CreateUserAddress
-    public int CreateUserAddress(UserAddress UA)
+    public int CreateUserAddress(UserAddressDal UA)
     {
         using (IDbConnection dbConnection = new SqlConnection(_connectionString))
         {
@@ -173,16 +173,16 @@ namespace DAL.Repositories
     #endregion
 
     #region ReadUserAddress
-    public UserAddress ReadUserAddress(int IdAdr)
+    public UserAddressDal ReadUserAddress(int IdAdr)
     {
         return null;
     }
     #endregion
 
     #region ReadAllOfUserAddress
-    public List<UserAddress> ReadAllOfUserAddress(int IdCust)
+    public List<UserAddressDal> ReadAllOfUserAddress(int IdCust)
     {
-        List<UserAddress> UserAdresses = new List<UserAddress>();
+        List<UserAddressDal> UserAdresses = new List<UserAddressDal>();
         try
         {
             using (IDbConnection dbConnection = new SqlConnection(_connectionString))
@@ -218,7 +218,7 @@ namespace DAL.Repositories
     #endregion
 
     #region UpdateUserAddress
-    public int UpdateUserAddress(UserAddress UA)
+    public int UpdateUserAddress(UserAddressDal UA)
     {
         using (IDbConnection dbConnection = new SqlConnection(_connectionString))
         {

@@ -24,7 +24,7 @@ namespace DAL.Repositories
         }
 
 	#region Create
-		public int Create(Customer C)
+		public int Create(CustomerDal C)
 		{
 			using (IDbConnection dbConnection = new SqlConnection(_connectionString))
 			{
@@ -49,9 +49,9 @@ namespace DAL.Repositories
 		}
 	#endregion
 	#region Read
-		public Customer? Read(int IdCust)
+		public CustomerDal? Read(int IdCust)
 		{
-			Customer Customer= null;
+			CustomerDal Customer= null;
 			try
 			{
 				using (IDbConnection dbConnection = new SqlConnection(_connectionString))
@@ -73,7 +73,7 @@ namespace DAL.Repositories
 		}
 	#endregion
 	#region Update
-		public int Update(Customer C)
+		public int Update(CustomerDal C)
 		{
 			using (IDbConnection dbConnection = new SqlConnection(_connectionString))
 			{
@@ -101,9 +101,9 @@ namespace DAL.Repositories
 		}
     #endregion
     #region FindCustomer
-        public List<Customer> FindCustomer(string cust)
+        public List<CustomerDal> FindCustomer(string cust)
 		{
-            List<Customer> Customers = new List<Customer>();
+            List<CustomerDal> Customers = new List<CustomerDal>();
 			try
 			{
             using (IDbConnection dbConnection = new SqlConnection(_connectionString))
@@ -139,9 +139,9 @@ namespace DAL.Repositories
 		}
         #endregion
     #region ReadLastCustomer
-        public List<Customer> ReadLastCustomer()
+        public List<CustomerDal> ReadLastCustomer()
         {
-            List<Customer> Customers = new List<Customer>();
+            List<CustomerDal> Customers = new List<CustomerDal>();
             try
             {
                 using (IDbConnection dbConnection = new SqlConnection(_connectionString))
@@ -174,5 +174,32 @@ namespace DAL.Repositories
             return Customers;
         }
         #endregion
+    #region ReadCustomerSummary
+        public CustomerSummaryDal ReadCustomerSummary(int IdCust)
+        {
+            using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+            {
+                dbConnection.Open();
+                try
+                {
+                    CustomerSummaryDal customerSummaryDal = new CustomerSummaryDal();
+					customerSummaryDal.IdCustomer = IdCust;
+                    customerSummaryDal.QtAdr = (int)DbConnectionExtensions.ExecuteScalar(dbConnection, "SP_Customer_CntAdr", true, new { IdCust = IdCust });
+					customerSummaryDal.QtOdp = (int)DbConnectionExtensions.ExecuteScalar(dbConnection, "SP_Customer_CntOdp", true, new { IdCust = IdCust });
+                    customerSummaryDal.QtCmd = (int)DbConnectionExtensions.ExecuteScalar(dbConnection, "SP_Customer_CntCmd", true, new { IdCust = IdCust });
+                    customerSummaryDal.QtFct = (int)DbConnectionExtensions.ExecuteScalar(dbConnection, "SP_Customer_CntFct", true, new { IdCust = IdCust });
+                    customerSummaryDal.QtRpr = (int)DbConnectionExtensions.ExecuteScalar(dbConnection, "SP_Customer_CntRpr", true, new { IdCust = IdCust });
+                    customerSummaryDal.QtDlc = (int)DbConnectionExtensions.ExecuteScalar(dbConnection, "SP_Customer_CntDlc", true, new { IdCust = IdCust });
+					TextColor.Write("customer", "Summary", $"Comptage de {customerSummaryDal.QtAdr} Adr, {customerSummaryDal.QtOdp} Odp,{customerSummaryDal.QtCmd} Cmd,{customerSummaryDal.QtFct} Fct,{customerSummaryDal.QtRpr} Rpr,{customerSummaryDal.QtDlc} Dlc pour le customer : {(int)IdCust}", "green");
+                    return customerSummaryDal;
+                }
+                catch (Exception ex)
+                {
+                    TextColor.Write("customer", "Summary", ex.Message, "red");
+                    return null;
+                }
+            }
+        }
+    #endregion
     }
 }

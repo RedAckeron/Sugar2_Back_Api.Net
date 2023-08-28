@@ -5,7 +5,7 @@ namespace BLL.Interfaces
 {
     public interface IUserService
     {
-        int Create(UserBll UserBll);
+        int Create(UserBll userBll);
         UserDal Read(int IdUser);
         UserDal Login(UserBll UserBll);
         int Update(UserDal User);

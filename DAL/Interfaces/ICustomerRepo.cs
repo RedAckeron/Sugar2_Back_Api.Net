@@ -9,12 +9,12 @@ namespace DAL.Interfaces
 {
     public interface ICustomerRepo
 {
-        int Create(Customer cust);
-        Customer Read(int id);
-        int Update(Customer cust);
+        int Create(CustomerDal cust);
+        CustomerDal Read(int id);
+        int Update(CustomerDal cust);
         int Delete(int id);
-        List<Customer> FindCustomer(string cust);
-        List<Customer> ReadLastCustomer();
-
+        List<CustomerDal> FindCustomer(string cust);
+        List<CustomerDal> ReadLastCustomer();
+        CustomerSummaryDal ReadCustomerSummary(int IdCust);
     }
 }

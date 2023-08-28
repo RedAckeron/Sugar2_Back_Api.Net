@@ -12,19 +12,19 @@ namespace BLL.Services
         _itemRepo = itemRepo;
     }
         
-    public int Create(Item Item)
+    public int Create(ItemDal Item)
         {
             return _itemRepo.Create(Item);
         }
-    public Item Read(int IdItem)
+    public ItemDal Read(int IdItem)
         {
             return _itemRepo.Read(IdItem);
         }
-    public List<Item>ReadAllOfCmd(int IdCmd)
+    public List<ItemDal>ReadAllOfCmd(int IdCmd)
         {
             return _itemRepo.ReadAllOfCmd(IdCmd);
         }
-    public int Update(Item Item) 
+    public int Update(ItemDal Item) 
         {
             return _itemRepo.Update(Item);
         }  

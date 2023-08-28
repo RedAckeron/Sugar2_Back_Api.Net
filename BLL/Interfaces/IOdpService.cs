@@ -4,9 +4,9 @@ namespace BLL.Interfaces
 {
     public interface IOdpService
     {
-        int Create(Odp Odp);
-		Odp Read(int IdOdp);
-        int Update(Odp Odp);
+        int Create(OdpDal Odp);
+		OdpDal Read(int IdOdp);
+        int Update(OdpDal Odp);
         int Delete(int IdOdp);
         }
 }

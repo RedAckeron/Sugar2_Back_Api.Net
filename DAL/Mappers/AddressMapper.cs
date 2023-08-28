@@ -11,9 +11,9 @@ namespace DAL.Mapper
 {
 	public static class AddressMapper
 	{
-	public static CustomerAddress DataToCustomerAdresse(this IDataRecord reader)
+	public static CustomerAddressDal DataToCustomerAdresse(this IDataRecord reader)
 		{
-			return new CustomerAddress()
+			return new CustomerAddressDal()
 			{
 				Id = (int)reader["id"],
 				IdCustomer= (int)reader["IdCustomer"],
@@ -26,9 +26,9 @@ namespace DAL.Mapper
 			};
         }
 
-        public static UserAddress DataToUserAdresse(this IDataRecord reader)
+        public static UserAddressDal DataToUserAdresse(this IDataRecord reader)
         {
-            return new UserAddress()
+            return new UserAddressDal()
             {
                 Id = (int)reader["id"],
                 IdUser= (int)reader["IdUser"],

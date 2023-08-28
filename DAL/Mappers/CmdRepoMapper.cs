@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapper
 {
-	public static class CmdMapper
+	public static class CmdRepoMapper
 	{
-		public static Cmd DataToCmd(this IDataRecord reader)
+		public static CmdDal DataToCmdDal(this IDataRecord reader)
 		{
-			return new Cmd()
+			return new CmdDal()
 			{
 				Id = (int)reader["id"],
 				AddByUser = (int)reader["AddByUser"],
@@ -22,9 +22,9 @@ namespace DAL.Mapper
 				DtIn = (DateTime)reader["DtIn"],
 			};
 		}
-		public static CmdLight DataToCmdLight(this IDataRecord reader)
+		public static CmdDalLight DataToCmdDalLight(this IDataRecord reader)
 		{
-			return new CmdLight()
+			return new CmdDalLight()
 			{
 				Id = (int)reader["id"],
 				DtIn = (DateTime)reader["DtIn"],

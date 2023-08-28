@@ -18,7 +18,7 @@ namespace Sugar_Back_V2.Controllers
         }
 
         [HttpPost("Create")]
-        public IActionResult Create(Customer cust)
+        public IActionResult Create(CustomerDal cust)
             {
             //    return Ok(new { Id = _customerService.Create(cust) });
             return Ok(_customerService.Create(cust));
@@ -31,7 +31,7 @@ namespace Sugar_Back_V2.Controllers
             }
 
         [HttpPut("Update")]
-        public IActionResult Update(Customer cust)
+        public IActionResult Update(CustomerDal cust)
             {
                 return Ok(_customerService.Update(cust));
             }
@@ -46,6 +46,12 @@ namespace Sugar_Back_V2.Controllers
         public IActionResult FindCustomer(string cust)
         {
             return Ok(_customerService.FindCustomer(cust));
+        }
+
+        [HttpGet("ReadCustomerSummary")]
+        public IActionResult ReadCustomerSummary(int IdCust)
+        {
+            return Ok(_customerService.ReadCustomerSummary(IdCust));
         }
 
         [HttpGet("ReadLastCustomer")]

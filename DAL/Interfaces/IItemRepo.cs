@@ -5,10 +5,10 @@ namespace DAL.Interfaces
 {
     public interface IItemRepo
     {
-        int Create(Item Item);
-        Item Read(int id);
-        List<Item> ReadAllOfCmd(int IdCmd);
-        int Update(Item Item);
+        int Create(ItemDal Item);
+        ItemDal Read(int id);
+        List<ItemDal> ReadAllOfCmd(int IdCmd);
+        int Update(ItemDal Item);
         int Delete(int id);
     }
 }

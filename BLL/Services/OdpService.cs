@@ -12,16 +12,16 @@ namespace BLL.Services
         _odpRepo = odpRepo;
     }
         
-    public int Create(Odp Odp)
+    public int Create(OdpDal Odp)
         {
             return _odpRepo.Create(Odp);
         }
-    public Odp Read(int IdOdp)
+    public OdpDal Read(int IdOdp)
         {
             return _odpRepo.Read(IdOdp);
         }
 
-    public int Update(Odp Odp) 
+    public int Update(OdpDal Odp) 
         {
             return _odpRepo.Update(Odp);
         }  

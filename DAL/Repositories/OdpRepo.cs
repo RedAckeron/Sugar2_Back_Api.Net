@@ -11,19 +11,19 @@ using ToolBox;
 using Tools.Ado;
 namespace DAL.Repositories
 {
-	public class CmdRepo : ICmdRepo
+	public class OdpRepo : IOdpRepo
 	{
-		TextColor TextColor = new TextColor("user", "create", "", "black");
+		TextColor TextColor = new TextColor("Odp", "create", "", "black");
 		private string? _connectionString;
 
-		public CmdRepo(IConfiguration config, IDbConnection connection)
+		public OdpRepo(IConfiguration config, IDbConnection connection)
 		{
 			_connectionString = config.GetConnectionString("default");
 		}
 
 		//####################################################################################################################################################################
 		#region Create
-		public int Create(CmdDal cmdDal)
+		public int Create(Models.OdpDal odp)
 		{
 			using (IDbConnection dbConnection = new SqlConnection(_connectionString))
 			{
@@ -31,7 +31,7 @@ namespace DAL.Repositories
 				try
 				{
 					int rows = 0;
-					rows = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Cmd_Create", true, new { cmdDal.AddByUser, cmdDal.IdCustomer });
+					rows = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Cmd_Create", true, new { odp.AddByUser, odp.IdCustomer });
 					TextColor.Write("cmd", "create", "Insertion de Item OK", "green");
 					return rows;
 				}
@@ -45,26 +45,26 @@ namespace DAL.Repositories
 		}
 		#endregion
 		#region Read
-		public CmdDal? Read(int IdCmd)
+		public OdpDal? Read(int IdOdp)
 		{
-			CmdDal Cmd = null;
+			OdpDal Odp = null;
 			try
 			{
 				using (IDbConnection dbConnection = new SqlConnection(_connectionString))
 				{
 					dbConnection.Open();
-					return dbConnection.ExecuteReader("SP_Cmd_Read", dr => dr.DataToCmdDal(), true, new { IdCmd = IdCmd }).SingleOrDefault();
+					return dbConnection.ExecuteReader("SP_Odp_Read", dr => dr.DataToOdpDal(), true, new { IdOdp = IdOdp }).SingleOrDefault();
 				}
 			}
 			catch (Exception ex)
 			{
-				TextColor.Write("cmd", "read", ex.Message, "red");
+				TextColor.Write("odp", "read", ex.Message, "red");
 			}
-			return Cmd;
+			return Odp;
 		}
 		#endregion
 		#region Update
-		public int Update(CmdDal C)
+		public int Update(OdpDal O)
 		{
 			/*
             using (IDbConnection dbConnection = new SqlConnection(_connectionString))
@@ -119,8 +119,8 @@ namespace DAL.Repositories
 			return 0;
 		}
 		#endregion
-		#region AddItemToCmd
-		public int AddItemToCmd(int IdCmd, int IdItem, int Qt, int AddByUser)
+		#region AddItemToOdp
+		public int AddItemToOdp(int IdOdp, int IdItem, int Qt, int AddByUser)
 		{
 			int rows = 0;
 			using (IDbConnection dbConnection = new SqlConnection(_connectionString))
@@ -128,8 +128,8 @@ namespace DAL.Repositories
 				dbConnection.Open();
 				try
 				{
-					rows = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Cmd_AddItemToCmd", true, new { IdItem, IdCmd, Qt, AddByUser });
-					TextColor.Write("cmd", "additem", $"Ajoute de {Qt} item {IdItem} dans cmd {IdCmd} OK", "green");
+					rows = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Odp_AddItemToOdp", true, new { IdItem, IdOdp, Qt, AddByUser });
+					TextColor.Write("cmd", "additem", $"Ajoute de {Qt} item {IdItem} dans cmd {IdOdp} OK", "green");
 				}
 				catch (Exception ex)
 				{
@@ -139,10 +139,10 @@ namespace DAL.Repositories
 			return rows;
 		}
         #endregion
-		#region ReadAllCmdLight
-        public List<CmdDalLight> ReadAllCmdLight(int  IdCust)
+		#region ReadAllOdpLight
+        public List<OdpDalLight> ReadAllOdpLight(int  IdCust)
         {
-            List<CmdDalLight> Cmds = new List<CmdDalLight>();
+            List<OdpDalLight> Odps = new List<OdpDalLight>();
             try
             {
                 using (IDbConnection dbConnection = new SqlConnection(_connectionString))
@@ -151,7 +151,7 @@ namespace DAL.Repositories
                     {
                         using (SqlCommand cmd = cnx.CreateCommand())
                         {
-                            cmd.CommandText = $"Exec SP_Cmd_ReadAllCmdLight @IdCust={IdCust};";
+                            cmd.CommandText = $"Exec SP_Odp_ReadAllOdpLight @IdCust={IdCust};";
                             cmd.Parameters.AddWithValue("IdCust", IdCust);
 
                             cnx.Open();
@@ -160,9 +160,9 @@ namespace DAL.Repositories
                                 while (reader.Read())
                                 {
 									Console.WriteLine(reader["id"]+" "+reader["DtIn"]);
-                                    Cmds.Add(CmdRepoMapper.DataToCmdDalLight(reader));
+                                    Odps.Add(OdpDalMapper.DataToOdpDalLight(reader));
                                 }
-                                TextColor.Write("Command", "ReadAllCmdLight", $"Récuperation de {Cmds.Count} commandes pour le client id {IdCust}", "green");
+                                TextColor.Write("Odp", "ReadAllOdpLight", $"Récuperation de {Odps.Count} Offres de prix pour le client id {IdCust}", "green");
                             }
                         }
                     }
@@ -172,7 +172,7 @@ namespace DAL.Repositories
             {
                 TextColor.Write("Command", "ReadAllCmdLight", ex.Message, "orange");
             }
-            return Cmds;
+            return Odps;
         }
         #endregion
     }

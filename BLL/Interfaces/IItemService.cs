@@ -4,10 +4,10 @@ namespace BLL.Interfaces
 {
     public interface IItemService
     {
-        int Create(Item Item);
-        Item Read(int IdItem);
-        List<Item>ReadAllOfCmd(int IdCmd);
-        int Update(Item Item);
+        int Create(ItemDal Item);
+        ItemDal Read(int IdItem);
+        List<ItemDal>ReadAllOfCmd(int IdCmd);
+        int Update(ItemDal Item);
         int Delete(int IdItem);
         }
 }

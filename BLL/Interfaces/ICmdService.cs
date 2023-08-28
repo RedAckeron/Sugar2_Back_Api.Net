@@ -1,15 +1,16 @@
-﻿using DAL.Models;
+﻿using BLL.Models;
+using DAL.Models;
 
 namespace BLL.Interfaces
 {
     public interface ICmdService
     {
-        int Create(Cmd Cmd);
-		Cmd Read(int IdCmd);
-        int Update(Cmd Cmd);
+        int Create(CmdBll cmdBll);
+		CmdBll Read(int IdCmd);
+        int Update(CmdBll Cmd);
         int Delete(int IdCmd);
         int AddItemToCmd(int IdCmd, int IdItem,int Qt,int AddByUser);
-        List<CmdLight> ReadAllCmdLight(int IDCust);
+        List<CmdBllLight> ReadAllCmdLight(int IDCust);
 
     }
 }

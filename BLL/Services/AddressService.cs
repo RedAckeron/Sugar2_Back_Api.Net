@@ -15,20 +15,20 @@ namespace BLL.Services
         _adresseRepo= adresseRepo;
     }
         
-    public int CreateCustomerAddress(CustomerAddress Adr)
+    public int CreateCustomerAddress(CustomerAddressDal Adr)
         {
         return _adresseRepo.CreateCustomerAddress(Adr);
         }
 
-    public CustomerAddress ReadCustomerAddress(int IdAdr)
+    public CustomerAddressDal ReadCustomerAddress(int IdAdr)
         {
         return _adresseRepo.ReadCustomerAddress(IdAdr);
         }
-    public List<CustomerAddress> ReadCustomerAllAddress(int IdCust)
+    public List<CustomerAddressDal> ReadCustomerAllAddress(int IdCust)
         {
             return _adresseRepo.ReadCustomerAllAddress(IdCust);
         }
-        public int UpdateCustomerAddress(CustomerAddress Adr) 
+        public int UpdateCustomerAddress(CustomerAddressDal Adr) 
         {
         return _adresseRepo.UpdateCustomerAddress(Adr);
         }  
@@ -38,17 +38,17 @@ namespace BLL.Services
         return _adresseRepo.DeleteCustomerAddress(id);
         }
 
-    public int CreateUserAddress(UserAddress Adr)
+    public int CreateUserAddress(UserAddressDal Adr)
         {
         return _adresseRepo.CreateUserAddress(Adr);
         }
 
-    public UserAddress ReadUserAddress(int IdAdr)
+    public UserAddressDal ReadUserAddress(int IdAdr)
         {
             return _adresseRepo.ReadUserAddress(IdAdr);
         }
 
-    public int UpdateUserAddress(UserAddress Adr)
+    public int UpdateUserAddress(UserAddressDal Adr)
         {
             return _adresseRepo.UpdateUserAddress(Adr);
         }

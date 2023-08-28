@@ -1,13 +1,10 @@
 ﻿using DAL.Interfaces;
 using DAL.Mapper;
 using DAL.Models;
+using DAL.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.ComponentModel;
 using System.Data;
-using System.Data.Common;
-using System.Reflection.PortableExecutable;
 using ToolBox;
 using Tools.Ado;
 namespace DAL.Repositories
@@ -23,7 +20,7 @@ namespace DAL.Repositories
         }
 
 		//####################################################################################################################################################################
-		public int Create(Item I)
+		public int Create(ItemDal I)
 		{
 			
             using (IDbConnection dbConnection = new SqlConnection(_connectionString))
@@ -45,16 +42,16 @@ namespace DAL.Repositories
 			
         }
 //####################################################################################################################################################################
-		public Item? Read(int IdItem)
+		public ItemDal Read(int IdItem)
 		{
-			Item Item = null;
+            ItemDal Item = null;
 			try
 			{
 				using (IDbConnection dbConnection = new SqlConnection(_connectionString))
 				{
 					dbConnection.Open();
-                    Item item;
-                    item = dbConnection.ExecuteReader("SP_Item_Read", dr => dr.DataToItem(), true, new { IdItem = IdItem }).SingleOrDefault();
+                    ItemDal item;
+                    item = dbConnection.ExecuteReader("SP_Item_Read", dr => dr.DataToItemDal(), true, new { IdItem = IdItem }).SingleOrDefault();
                     TextColor.Write("item", "Read", $"Lecture de Item {item.Label}", "green");
 					return item;
 				}
@@ -66,9 +63,9 @@ namespace DAL.Repositories
 			return Item;
 		}
 		//####################################################################################################################################################################
-		public List<Item> ReadAllOfCmd(int IdCmd)
+		public List<ItemDal> ReadAllOfCmd(int IdCmd)
 		{
-			List<Item> basket = new List<Item>();
+            List<ItemDal> basket = new List<ItemDal>();
             using (SqlConnection cnx = new SqlConnection(_connectionString))
 			{
 				using (SqlCommand cmd = cnx.CreateCommand())
@@ -84,7 +81,7 @@ namespace DAL.Repositories
 							using (IDbConnection dbConnection = new SqlConnection(_connectionString))
 							{
 								dbConnection.Open();
-								Item item = dbConnection.ExecuteReader("SP_Item_Read", dr => dr.DataToItem(), true, new { IdItem = reader["id"] }).SingleOrDefault();
+                                ItemDal item = dbConnection.ExecuteReader("SP_Item_Read", dr => dr.DataToItemDal(), true, new { IdItem = reader["id"] }).SingleOrDefault();
 								item.Qt = (int)reader["Qt"];
 								basket.Add(item);
 							}
@@ -96,7 +93,7 @@ namespace DAL.Repositories
 		}
 //####################################################################################################################################################################
        
-        public int Update(Item I)
+        public int Update(ItemDal I)
 		{
 			/*
             using (IDbConnection dbConnection = new SqlConnection(_connectionString))

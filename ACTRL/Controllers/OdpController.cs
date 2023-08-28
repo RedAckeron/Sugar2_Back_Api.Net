@@ -18,11 +18,10 @@ namespace Sugar_Back_V2.Controllers
         }
 
         [HttpPost("Create")]
-        public IActionResult Create(Odp Odp)
+        public IActionResult Create(OdpDal Odp)
         {
             return Ok(_odpService.Create(Odp));
         }
-
 
         [HttpGet("Read/{IdOdp}")]
         public IActionResult Read(int IdOdp)
@@ -31,7 +30,7 @@ namespace Sugar_Back_V2.Controllers
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(Odp Odp)
+        public IActionResult Update(OdpDal Odp)
         {
             return Ok(_odpService.Update(Odp));
         }

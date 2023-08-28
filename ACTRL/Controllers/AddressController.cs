@@ -18,7 +18,7 @@ namespace Sugar_Back_V2.Controllers
         }
         
         [HttpPost("CreateCustomerAddress")]
-        public IActionResult CreateCustomerAddress(CustomerAddress Adr)
+        public IActionResult CreateCustomerAddress(CustomerAddressDal Adr)
         {
             return Ok(_addressService.CreateCustomerAddress(Adr));
         }
@@ -36,7 +36,7 @@ namespace Sugar_Back_V2.Controllers
         }
 
         [HttpPut("UpdateCustomerAddress")]
-        public IActionResult UpdateCustomerAddress(CustomerAddress Adr)
+        public IActionResult UpdateCustomerAddress(CustomerAddressDal Adr)
         {
             return Ok(_addressService.UpdateCustomerAddress(Adr));
         }
@@ -48,7 +48,7 @@ namespace Sugar_Back_V2.Controllers
         }
 
         [HttpPost("CreateUserAddress")]
-        public IActionResult CreateUserAddress(UserAddress Adr)
+        public IActionResult CreateUserAddress(UserAddressDal Adr)
         {
             return Ok(_addressService.CreateUserAddress(Adr));
         }
@@ -60,7 +60,7 @@ namespace Sugar_Back_V2.Controllers
         }
 
         [HttpPut("UpdateUserAddress")]
-        public IActionResult UpdateUserAddress(UserAddress Adr)
+        public IActionResult UpdateUserAddress(UserAddressDal Adr)
         {
             return Ok(_addressService.UpdateUserAddress(Adr));
         }

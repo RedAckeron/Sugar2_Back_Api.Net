@@ -1,10 +1,10 @@
 ﻿using BLL.Interfaces;
+using BLL.Mappers;
+using BLL.Models;
 using DAL.Interfaces;
-using DAL.Mapper;
-using DAL.Models;
-using DAL.Repositories;
 using Microsoft.Data.SqlClient;
 using System;
+using System.Data.Common;
 
 namespace BLL.Services
 {
@@ -18,31 +18,43 @@ namespace BLL.Services
 			_cmdRepo = cmdRepo;
             _itemRepo = itemRepo;
         }
-    public int Create(Cmd Cmd)
+    #region Create
+        public int Create(CmdBll cmdBll)
         {
-            return _cmdRepo.Create(Cmd);
+            return _cmdRepo.Create(CmdServiceMapper.CmdBllToCmdDal(cmdBll));
         }
-    public Cmd Read(int IdCmd)
+        #endregion
+    #region Read
+        public CmdBll Read(int IdCmd)
         {
-            Cmd Cmd = _cmdRepo.Read(IdCmd);
-            Cmd.Basket=_itemRepo.ReadAllOfCmd(IdCmd);
-			return Cmd;
+            CmdBll Cmd = CmdServiceMapper.CmdDalToCmdBll(_cmdRepo.Read(IdCmd));
+            Cmd.Basket = _itemRepo.ReadAllOfCmd(IdCmd);
+            return Cmd;
         }
-    public int Update(Cmd Cmd) 
+    #endregion
+    #region Update
+        public int Update(CmdBll cmdBll)
         {
-            return _cmdRepo.Update(Cmd);
+            return _cmdRepo.Update(CmdServiceMapper.CmdBllToCmdDal(cmdBll) );
         }
-    public int Delete(int IdCmd) 
+    #endregion
+    #region Delete
+        public int Delete(int IdCmd)
         {
             return _cmdRepo.Delete(IdCmd);
         }
-    public int AddItemToCmd(int IdCmd, int IdItem ,int Qt,int AddByUser) 
+        #endregion
+    #region AddItemToCmd
+        public int AddItemToCmd(int IdCmd, int IdItem, int Qt, int AddByUser)
         {
-            return _cmdRepo.AddItemToCmd(IdCmd,IdItem,Qt,AddByUser);
+            return _cmdRepo.AddItemToCmd(IdCmd, IdItem, Qt, AddByUser);
         }
-    public List<CmdLight> ReadAllCmdLight(int IdCust)
+        #endregion
+    #region ReadAllCmdLight
+        public List<CmdBllLight> ReadAllCmdLight(int IdCust)
         {
-            return _cmdRepo.ReadAllCmdLight(IdCust);
+            return CmdServiceMapper.CmdDalLightToCmdBllLight(_cmdRepo.ReadAllCmdLight(IdCust));
         }
+    #endregion
     }
 }

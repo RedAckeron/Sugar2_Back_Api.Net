@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapper
 {
-    public static class ItemMapper
+    public static class ItemDalMapper
     {
-        public static Item DataToItem(this IDataRecord reader)
+        public static ItemDal DataToItemDal(this IDataRecord reader)
         {
-            return new Item()
+            return new ItemDal()
             {
                 Id = (int)reader["id"],
                 Label = (string)reader["Label"],

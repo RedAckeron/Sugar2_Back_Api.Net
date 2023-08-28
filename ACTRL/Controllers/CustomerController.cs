@@ -48,7 +48,7 @@ namespace Sugar_Back_V2.Controllers
             return Ok(_customerService.FindCustomer(cust));
         }
 
-        [HttpGet("ReadCustomerSummary")]
+        [HttpGet("ReadCustomerSummary/{IdCust}")]
         public IActionResult ReadCustomerSummary(int IdCust)
         {
             return Ok(_customerService.ReadCustomerSummary(IdCust));

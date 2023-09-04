@@ -31,13 +31,14 @@ namespace DAL.Repositories
 				try
 				{
 					int rows = 0;
-					rows = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Cmd_Create", true, new { odp.AddByUser, odp.IdCustomer });
-					TextColor.Write("cmd", "create", "Insertion de Item OK", "green");
+					Console.WriteLine("[ODP]User : "+odp.AddByUser+" - Customer : "+odp.IdCustomer);
+					rows = DbConnectionExtensions.ExecuteNonQuery(dbConnection, "SP_Odp_Create", true, new { odp.AddByUser, odp.IdCustomer });
+					TextColor.Write("Odp", "create", "Insertion de Odp OK", "green");
 					return rows;
 				}
 				catch (Exception ex)
 				{
-					TextColor.Write("cmd", "create", ex.Message, "red");
+					TextColor.Write("Odp", "create", ex.Message, "red");
 					return 0;
 				}
 			}
@@ -170,7 +171,7 @@ namespace DAL.Repositories
             }
             catch (Exception ex)
             {
-                TextColor.Write("Command", "ReadAllCmdLight", ex.Message, "orange");
+                TextColor.Write("Command", "ReadAllOdpLight", ex.Message, "orange");
             }
             return Odps;
         }

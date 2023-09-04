@@ -13,11 +13,11 @@ namespace DAL.Models
         public int AddByUser { get; set; }
         public int IdCustomer { get; set; }
         public DateTime DtIn{ get; set; }
+        public List<ItemDal> Basket { get; set; }
     }
     public class OdpDalLight
     {
         public int Id { get; set; }
         public DateTime DtIn { get; set; }
-
     }
 }

@@ -1,7 +1,10 @@
-﻿using ACTRL.Models.Forms;
+﻿using ACTRL.Mappers;
+using ACTRL.Models.Forms;
 using BLL.Interfaces;
+using BLL.Services;
 using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.Intrinsics.Arm;
 
 
 namespace Sugar_Back_V2.Controllers
@@ -21,7 +24,8 @@ namespace Sugar_Back_V2.Controllers
         [HttpPost("Create")]
         public IActionResult Create(OdpRegisterForm odpRegisterForm)
         {
-            return Ok(_odpService.Create(Odp));
+            Console.WriteLine("ODP ADD "+ odpRegisterForm.AddByUser+" "+odpRegisterForm.IdCustomer);
+            return Ok(_odpService.Create(OdpControllerMapper.OdpRegisterFormToOdpBll(odpRegisterForm)));
         }
 
         [HttpGet("Read/{IdOdp}")]
@@ -31,14 +35,20 @@ namespace Sugar_Back_V2.Controllers
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(OdpDal Odp)
+        public IActionResult Update(OdpRegisterForm odpRegisterForm)
         {
-            return Ok(_odpService.Update(Odp));
+            return Ok(_odpService.Update(OdpControllerMapper.OdpRegisterFormToOdpBll(odpRegisterForm)));
         }
 
         [HttpDelete("Delete/{IdItem}")]
         public IActionResult Delete(int IdOdp) {
             return Ok(_odpService.Delete(IdOdp));
+        }
+
+        [HttpGet("ReadAllOdpLight")]
+        public IActionResult ReadAllOdpLight(int IdCust)
+        {
+            return Ok(_odpService.ReadAllOdpLight(IdCust));
         }
     }
 }

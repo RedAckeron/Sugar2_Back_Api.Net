@@ -1,6 +1,10 @@
 ﻿using BLL.Interfaces;
+using BLL.Mappers;
+using BLL.Models;
 using DAL.Interfaces;
+using DAL.Mapper;
 using DAL.Models;
+using DAL.Repositories;
 
 namespace BLL.Services
 {
@@ -12,22 +16,30 @@ namespace BLL.Services
         _odpRepo = odpRepo;
     }
         
-    public int Create(OdpDal Odp)
+    public int Create(OdpBll odpBll)
         {
-            return _odpRepo.Create(Odp);
-        }
-    public OdpDal Read(int IdOdp)
-        {
-            return _odpRepo.Read(IdOdp);
+            return _odpRepo.Create(OdpServiceMapper.OdpBllToOdpDal(odpBll));
         }
 
-    public int Update(OdpDal Odp) 
+    public OdpBll Read(int IdOdp)
         {
-            return _odpRepo.Update(Odp);
-        }  
+            return OdpServiceMapper.OdpDalToOdpBll(_odpRepo.Read(IdOdp));
+        }
+
+    public int Update(OdpBll odpBll) 
+        {
+            return _odpRepo.Update(OdpServiceMapper.OdpBllToOdpDal(odpBll));
+        } 
+        
     public int Delete(int IdOdp) 
         {
             return _odpRepo.Delete(IdOdp);
         }
+    #region ReadAllCmdLight
+    public List<OdpBllLight> ReadAllOdpLight(int IdCust)
+        {
+            return OdpServiceMapper.OdpDalLightToOdpBllLight(_odpRepo.ReadAllOdpLight(IdCust));
+        }
+        #endregion
     }
 }

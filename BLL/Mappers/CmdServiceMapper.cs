@@ -30,7 +30,7 @@ namespace BLL.Mappers
                 Basket = cmdBll.Basket
             };
         }
-       
+       /*
         public static List<CmdDalLight> CmdBllLightToCmdDalLight(List<CmdBllLight> cmdBllLights)
         {
             List<CmdDalLight> cmdDalLights = new List<CmdDalLight>();
@@ -44,6 +44,7 @@ namespace BLL.Mappers
             }
              return cmdDalLights;
         }
+       */
         public static List<CmdBllLight> CmdDalLightToCmdBllLight(List<CmdDalLight> cmdDalLights)
         {
             List<CmdBllLight> cmdBllLights = new List<CmdBllLight>();

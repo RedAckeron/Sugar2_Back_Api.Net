@@ -23,8 +23,6 @@ namespace DAL.Repositories
 			_connectionString = config.GetConnectionString("default");
         }
 
-
-
 	#region CreateCustomerAddress
 		public int CreateCustomerAddress(CustomerAddressDal CA)
 		{

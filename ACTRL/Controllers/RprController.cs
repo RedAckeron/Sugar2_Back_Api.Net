@@ -1,5 +1,6 @@
 ﻿using ACTRL.Mappers;
 using ACTRL.Models.Forms;
+using BLL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,13 +10,17 @@ namespace ACTRL.Controllers
     [ApiController]
     public class RprController : ControllerBase
     {
-
-        [HttpPost("Create")]
-        public IActionResult Create(CmdRegisterForm cmdRegisterForm)
+        private readonly IRprService _rprService;
+        public RprController(IRprService rprService)
         {
-            return Ok(_rprService.Create(CmdControllerMapper.CmdRegisterFormToCmdBll(cmdRegisterForm)));
+            _rprService = rprService;
         }
 
 
+        [HttpPost("Create")]
+        public IActionResult Create(RprRegisterForm rprRegisterForm)
+        {
+            return Ok(_rprService.Create(RprControllerMapper.RprRegisterFormToRprBll(rprRegisterForm)));
+        }
     }
 }

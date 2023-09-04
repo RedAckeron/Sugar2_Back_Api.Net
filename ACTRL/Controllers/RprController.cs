@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ACTRL.Mappers;
+using ACTRL.Models.Forms;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ACTRL.Controllers
@@ -7,14 +9,12 @@ namespace ACTRL.Controllers
     [ApiController]
     public class RprController : ControllerBase
     {
-        /*
-        private readonly IRprService _rprService;
-        public RprController(IRprService rprService)
-        { 
-        
-        }
-        */
 
+        [HttpPost("Create")]
+        public IActionResult Create(CmdRegisterForm cmdRegisterForm)
+        {
+            return Ok(_rprService.Create(CmdControllerMapper.CmdRegisterFormToCmdBll(cmdRegisterForm)));
+        }
 
 
     }

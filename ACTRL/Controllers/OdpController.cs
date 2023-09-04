@@ -1,4 +1,5 @@
-﻿using BLL.Interfaces;
+﻿using ACTRL.Models.Forms;
+using BLL.Interfaces;
 using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +19,7 @@ namespace Sugar_Back_V2.Controllers
         }
 
         [HttpPost("Create")]
-        public IActionResult Create(OdpDal Odp)
+        public IActionResult Create(OdpRegisterForm odpRegisterForm)
         {
             return Ok(_odpService.Create(Odp));
         }

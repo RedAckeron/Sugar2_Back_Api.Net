@@ -8,6 +8,6 @@ namespace BLL.Interfaces
 		RprBll Read(int IdRpr);
         int Update(RprBll rprBll);
         int Delete(int IdRpr);
-        }
-
+       // List<RprBllLight> ReadAllRprLight(int IDCust);
+    }
 }

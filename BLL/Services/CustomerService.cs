@@ -3,6 +3,7 @@ using BLL.Mappers;
 using BLL.Models;
 using DAL.Interfaces;
 using DAL.Models;
+using DAL.Repositories;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
@@ -12,10 +13,14 @@ namespace BLL.Services
     { 
     private readonly ICustomerRepo _customerRepo;
     private readonly IAddressRepo _adresseRepo;
-    public CustomerService(ICustomerRepo customerRepo, IAddressRepo adresseRepo)
+    private readonly ICmdRepo _cmdRepo;
+    private readonly IOdpRepo _odpRepo;
+    public CustomerService(ICustomerRepo customerRepo, IAddressRepo adresseRepo,ICmdRepo cmdRepo,IOdpRepo odpRepo)
     {
         _customerRepo = customerRepo;
-            _adresseRepo = adresseRepo;
+        _adresseRepo = adresseRepo;
+        _cmdRepo = cmdRepo;
+        _odpRepo = odpRepo;
     }
         
     public int Create(CustomerDal cust)
@@ -50,7 +55,16 @@ namespace BLL.Services
         }
         public CustomerSummaryBll ReadCustomerSummary(int IdCust)
         {
-            return CustomerSummaryMapper.CustomerSummaryDalToCustomerSummaryBll(_customerRepo.ReadCustomerSummary(IdCust));
+            CustomerSummaryBll customerSummaryBll = new CustomerSummaryBll()
+            {
+                IdCustomer = IdCust,
+                odpLights = OdpServiceMapper.OdpDalLightToOdpBllLight(_odpRepo.ReadAllOdpLight(IdCust)),
+                cmdLights = CmdServiceMapper.CmdDalLightToCmdBllLight(_cmdRepo.ReadAllCmdLight(IdCust)),
+                fctLights = null,
+                rprLights = null,
+                dlcLights = null
+            };
+         return customerSummaryBll;
         }
     }
 }

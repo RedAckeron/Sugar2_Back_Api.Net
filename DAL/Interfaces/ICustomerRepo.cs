@@ -15,6 +15,6 @@ namespace DAL.Interfaces
         int Delete(int id);
         List<CustomerDal> FindCustomer(string cust);
         List<CustomerDal> ReadLastCustomer();
-        CustomerSummaryDal ReadCustomerSummary(int IdCust);
+        //CustomerSummaryDal ReadCustomerSummary(int IdCust);
     }
 }

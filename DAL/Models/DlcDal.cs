@@ -1,20 +1,20 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-using DAL.Models;
-
-namespace BLL.Models
+namespace DAL.Models
 
 {
-    public class FctBll
-	{
+    public class DlcDal
+    {
         public int Id { get; set; }
-        public int IdOdp { get; set; } = 0;
         public int AddByUser { get; set; }
         public int IdCustomer { get; set; }
         public DateTime DtIn{ get; set; }
-        public List<ItemDal> Basket { get; set; }
     }
-    public class FctBllLight
+    public class DlcDalLight
     {
         public int Id { get; set; }
         public DateTime DtIn { get; set; }

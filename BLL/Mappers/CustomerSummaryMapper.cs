@@ -5,6 +5,7 @@ namespace BLL.Mappers
 {
     public static class CustomerSummaryMapper
     {
+        /*
 		public static CustomerSummaryBll CustomerSummaryDalToCustomerSummaryBll(CustomerSummaryDal customerSummaryDal)
 		{
             return new CustomerSummaryBll()
@@ -31,5 +32,6 @@ namespace BLL.Mappers
                 QtDlc = customerSummaryBll.QtDlc,
             };
         }
+        */
     }
 }

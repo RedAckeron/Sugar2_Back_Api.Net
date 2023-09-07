@@ -160,7 +160,7 @@ namespace DAL.Repositories
                             {
                                 while (reader.Read())
                                 {
-									Console.WriteLine(reader["id"]+" "+reader["DtIn"]);
+									//Console.WriteLine(reader["id"]+" "+reader["DtIn"]);
                                     Rprs.Add(RprDalMapper.DataToRprDalLight(reader));
                                 }
                                 TextColor.Write("Odp", "ReadAllOdpLight", $"Récuperation de {Rprs.Count} Offres de prix pour le client id {IdCust}", "green");

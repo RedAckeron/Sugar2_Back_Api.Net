@@ -46,6 +46,10 @@ builder.Services.AddScoped<IOdpRepo, OdpRepo>();
 builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IAddressRepo, AddressRepo>();
 
+builder.Services.AddScoped<IDlcService, DlcService>();
+builder.Services.AddScoped<IDlcRepo, DlcRepo>();
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,

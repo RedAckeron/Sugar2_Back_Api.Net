@@ -5,6 +5,7 @@ using DAL.Interfaces;
 using DAL.Models;
 using DAL.Repositories;
 using Microsoft.Data.SqlClient;
+using Microsoft.IdentityModel.Tokens;
 using System.Data;
 
 namespace BLL.Services
@@ -15,12 +16,19 @@ namespace BLL.Services
     private readonly IAddressRepo _adresseRepo;
     private readonly ICmdRepo _cmdRepo;
     private readonly IOdpRepo _odpRepo;
-    public CustomerService(ICustomerRepo customerRepo, IAddressRepo adresseRepo,ICmdRepo cmdRepo,IOdpRepo odpRepo)
+    private readonly IFctRepo _fctRepo;
+    private readonly IRprRepo _rprRepo;
+    private readonly IDlcRepo _dlcRepo;
+
+    
+    public CustomerService(ICustomerRepo customerRepo, IAddressRepo adresseRepo,ICmdRepo cmdRepo,IOdpRepo odpRepo,IFctRepo fctRepo,IDlcRepo dlcRepo)
     {
         _customerRepo = customerRepo;
         _adresseRepo = adresseRepo;
         _cmdRepo = cmdRepo;
         _odpRepo = odpRepo;
+        _fctRepo = fctRepo;
+        _dlcRepo = dlcRepo;
     }
         
     public int Create(CustomerDal cust)
@@ -62,7 +70,7 @@ namespace BLL.Services
                 cmdLights = CmdServiceMapper.CmdDalLightToCmdBllLight(_cmdRepo.ReadAllCmdLight(IdCust)),
                 fctLights = null,
                 rprLights = null,
-                dlcLights = null
+                dlcLights = DlcServiceMapper.DlcDalLightToDlcBllLight(_dlcRepo.ReadAllDlcLight(IdCust))
             };
          return customerSummaryBll;
         }

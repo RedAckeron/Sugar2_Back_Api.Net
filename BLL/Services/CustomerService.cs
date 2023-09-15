@@ -1,19 +1,17 @@
-﻿using BLL.Interfaces;
+﻿using ACTRL.Mappers;
+using Bll.Models;
+using BLL.Interfaces;
 using BLL.Mappers;
 using BLL.Models;
 using DAL.Interfaces;
-using DAL.Models;
-using DAL.Repositories;
-using Microsoft.Data.SqlClient;
-using Microsoft.IdentityModel.Tokens;
-using System.Data;
+using DAL.Mapper;
 
 namespace BLL.Services
 {
     public class CustomerService:ICustomerService
     { 
     private readonly ICustomerRepo _customerRepo;
-    private readonly IAddressRepo _adresseRepo;
+    private readonly IAddressRepo _adrRepo;
     private readonly ICmdRepo _cmdRepo;
     private readonly IOdpRepo _odpRepo;
     private readonly IFctRepo _fctRepo;
@@ -21,55 +19,58 @@ namespace BLL.Services
     private readonly IDlcRepo _dlcRepo;
 
     
-    public CustomerService(ICustomerRepo customerRepo, IAddressRepo adresseRepo,ICmdRepo cmdRepo,IOdpRepo odpRepo,IFctRepo fctRepo,IDlcRepo dlcRepo)
+    public CustomerService(ICustomerRepo customerRepo, IAddressRepo adrRepo,ICmdRepo cmdRepo,IOdpRepo odpRepo,IFctRepo fctRepo,IRprRepo rprRepo,IDlcRepo dlcRepo)
     {
         _customerRepo = customerRepo;
-        _adresseRepo = adresseRepo;
+        _adrRepo = adrRepo;
         _cmdRepo = cmdRepo;
         _odpRepo = odpRepo;
         _fctRepo = fctRepo;
         _dlcRepo = dlcRepo;
+        _rprRepo = rprRepo;
     }
         
-    public int Create(CustomerDal cust)
+    public int Create(CustomerBll custBll)
         {
-        return _customerRepo.Create(cust);
+        return _customerRepo.Create(CustomerBllMapper.CustomerBllToCustomerDal(custBll));
         }
-
-    public CustomerDal Read(int id)
+        
+    public CustomerBll Read(int idCust)
         {
-        CustomerDal Cust = _customerRepo.Read(id);
-        if (Cust!=null)Cust.Adresses = _adresseRepo.ReadCustomerAllAddress(id);
-
-            return Cust;
+        return CustomerBllMapper.CustomerDalToCustomerBll(_customerRepo.Read(idCust));
         }
-    public int Update(CustomerDal cust) 
+        
+    public int Update(CustomerBll custBll) 
         {
-           
-            return _customerRepo.Update(cust);
+        return _customerRepo.Update(CustomerBllMapper.CustomerBllToCustomerDal(custBll));
         }  
+
     public int Delete(int id) 
         {
            
             return _customerRepo.Delete(id);
         }
-    public List<CustomerDal> FindCustomer(string cust)
+
+    public List<CustomerBll> FindCustomer(string cust)
         {
-            return _customerRepo.FindCustomer(cust);
+            return CustomerBllMapper.CustomerDalToCustomerBll(_customerRepo.FindCustomer(cust));
         }
-    public List<CustomerDal> ReadLastCustomer()
+
+    public List<CustomerBll> ReadLastCustomer()
         {
-            return _customerRepo.ReadLastCustomer();
+            return CustomerBllMapper.CustomerDalToCustomerBll(_customerRepo.ReadLastCustomer());
         }
+
         public CustomerSummaryBll ReadCustomerSummary(int IdCust)
         {
             CustomerSummaryBll customerSummaryBll = new CustomerSummaryBll()
             {
                 IdCustomer = IdCust,
+                adrLights = AdrBllMapper.AdrDalLightToAdrBllLight(_adrRepo.ReadAllAdrLight(IdCust)),
                 odpLights = OdpServiceMapper.OdpDalLightToOdpBllLight(_odpRepo.ReadAllOdpLight(IdCust)),
                 cmdLights = CmdServiceMapper.CmdDalLightToCmdBllLight(_cmdRepo.ReadAllCmdLight(IdCust)),
-                fctLights = null,
-                rprLights = null,
+                fctLights = FctServiceMapper.FctDalLightToFctBllLight(_fctRepo.ReadAllFctLight(IdCust)),
+                rprLights = RprServiceMapper.RprDalLightToRprBllLight(_rprRepo.ReadAllRprLight(IdCust)),
                 dlcLights = DlcServiceMapper.DlcDalLightToDlcBllLight(_dlcRepo.ReadAllDlcLight(IdCust))
             };
          return customerSummaryBll;

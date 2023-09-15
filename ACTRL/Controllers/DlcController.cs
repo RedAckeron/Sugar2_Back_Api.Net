@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ACTRL.Controllers
 {
+    [Route("/[controller]/")]
+    [ApiController]
+
     public class DlcController : Controller
     {
 

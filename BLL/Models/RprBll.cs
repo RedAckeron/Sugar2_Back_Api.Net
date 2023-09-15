@@ -10,7 +10,7 @@ namespace BLL.Models
         public int IdCustomer { get; set; }
         public DateTime DtIn{ get; set; }
     }
-    public class RprDalLight
+    public class RprBllLight
     {
         public int Id { get; set; }
         public DateTime DtIn { get; set; }

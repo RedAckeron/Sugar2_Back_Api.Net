@@ -1,5 +1,5 @@
 ﻿using DAL.Interfaces;
-using DAL.Mapper;
+using DAL.Mappers;
 using DAL.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;

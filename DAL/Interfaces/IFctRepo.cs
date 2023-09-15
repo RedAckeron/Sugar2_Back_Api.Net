@@ -9,6 +9,7 @@ namespace DAL.Interfaces
 		FctDal Read(int IdFct);
         int Update(FctDal fctDal);
         int Delete(int IdFct);
-        
-        }
+        List<FctDalLight> ReadAllFctLight(int IDCust);
+
+    }
 }

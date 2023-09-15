@@ -28,5 +28,21 @@ namespace BLL.Mappers
                 Basket = fctBll.Basket
             };
         }
+
+        public static List<FctBllLight> FctDalLightToFctBllLight(List<FctDalLight> fctDalLights)
+        {
+            List<FctBllLight> fctBllLights = new List<FctBllLight>();
+
+            foreach (FctDalLight fctDalLight in fctDalLights)
+            {
+                fctBllLights.Add(new FctBllLight()
+                {
+                    Id = fctDalLight.Id,
+                    DtIn = fctDalLight.DtIn,
+                });
+            }
+            return fctBllLights;
+
+        }
     }
 }

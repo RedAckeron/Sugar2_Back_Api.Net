@@ -8,5 +8,7 @@ namespace DAL.Interfaces
         RprDal Read(int IdRpr);
         int Update(RprDal rprDal);
         int Delete(int IdRpr);
-        }
+        List<RprDalLight> ReadAllRprLight(int IDCust);
+
+    }
 }

@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Mapper
+namespace DAL.Mappers
 {
-	public static class CustomerMapper
+	public static class CustomerDalMapper
 	{
-	public static CustomerDal DataToCustomer(this IDataRecord reader)
+	public static CustomerDal DataRecordToDalCustomer(this IDataRecord reader)
 		{
 			return new CustomerDal()
 			{
@@ -26,8 +26,9 @@ namespace DAL.Mapper
 		}
 	public static CustomerDal DataToFindCustomer(this IDataRecord reader) 
 		{
-			return new CustomerDal()
+            return new CustomerDal()
 			{
+				
 				Id = (int)reader["id"],
 				FirstName = (string)reader["FirstName"],
 				LastName = (string)reader["LastName"],

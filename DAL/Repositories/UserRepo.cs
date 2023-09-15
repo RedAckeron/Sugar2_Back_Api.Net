@@ -1,5 +1,5 @@
 ﻿using DAL.Interfaces;
-using DAL.Mapper;
+using DAL.Mappers;
 using DAL.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -74,23 +74,39 @@ namespace DAL.Repositories
         #region LOGIN
         public UserDal? Login(UserDal userDal)
 			{
-            UserDal user = null;
+            UserDal userdal;
             try
             {
                 using (IDbConnection dbConnection = new SqlConnection(_connectionString))
                 {
+                   
+
                     dbConnection.Open();
-                    user = dbConnection.ExecuteReader("SP_User_Login", dr => dr.DataToUser(), true, new { Email=userDal.Email, Password=userDal.Password }).SingleOrDefault();
-                    if (user != null) TextColor.Write("user", "login", $"User {user.Email} : OK", "green"); 
-					else TextColor.Write("user", "login", "User est null", "red");
+                    userdal = dbConnection.ExecuteReader("SP_User_Login", dr => dr.DataToUser(), true, new { Email = userDal.Email, Password = userDal.Password }).SingleOrDefault<UserDal>();
+
+                    if (userdal!=null)
+                    {
+                       
+                        TextColor.Write("user", "login", $"User {userdal.Email} : OK", "green");
+                    }
+
+                    else
+                    {
+                        throw new ArgumentException("Login ou password incorrect");
+                    }
+                    return userdal;
                 }
-			}
+                
+            }
             catch (Exception ex)
-                {
-                    TextColor.Write("user", "create", "Login ou mot de passe incorrect", "red");
-                }
-            return user;
-        }
+            {
+                TextColor.Write("user", "login", ex.Message, "red");
+               
+                return new UserDal() { Id=0};
+            }
+            
+           
+           }
         #endregion
         
         #region UPDATE

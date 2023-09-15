@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Models
+namespace Bll.Models
 
 {
-    public class CustomerDal
+    public class CustomerBll
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -17,7 +17,7 @@ namespace DAL.Models
         public string Call2 { get; set; }
         public DateTime DtIn { get; set; }
         public int AddByUser { get; set; }
-        public IEnumerable<AdrDal> Adresses { get; set; }
+        //public IEnumerable<AddressDal> Adresses { get; set; }
 
     }
 }

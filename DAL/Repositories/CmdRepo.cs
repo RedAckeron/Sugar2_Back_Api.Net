@@ -1,5 +1,5 @@
 ﻿using DAL.Interfaces;
-using DAL.Mapper;
+using DAL.Mappers;
 using DAL.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +23,7 @@ namespace DAL.Repositories
 
 		//####################################################################################################################################################################
 		#region Create
-		public int Create(CmdDal cmdDal)
+		public int Create(Models.CmdDal cmdDal)
 		{
 			using (IDbConnection dbConnection = new SqlConnection(_connectionString))
 			{
@@ -45,9 +45,9 @@ namespace DAL.Repositories
 		}
 		#endregion
 		#region Read
-		public CmdDal? Read(int IdCmd)
+		public Models.CmdDal? Read(int IdCmd)
 		{
-			CmdDal Cmd = null;
+            Models.CmdDal Cmd = null;
 			try
 			{
 				using (IDbConnection dbConnection = new SqlConnection(_connectionString))
@@ -64,7 +64,7 @@ namespace DAL.Repositories
 		}
 		#endregion
 		#region Update
-		public int Update(CmdDal C)
+		public int Update(Models.CmdDal C)
 		{
 			/*
             using (IDbConnection dbConnection = new SqlConnection(_connectionString))
@@ -160,7 +160,7 @@ namespace DAL.Repositories
                                 while (reader.Read())
                                 {
 									//Console.WriteLine(reader["id"]+" "+reader["DtIn"]);
-                                    Cmds.Add(CmdRepoMapper.DataToCmdDalLight(reader));
+                                    Cmds.Add(CmdDalMapper.DataToCmdDalLight(reader));
                                 }
                                 TextColor.Write("Command", "ReadAllCmdLight", $"Récuperation de {Cmds.Count} commandes pour le client id {IdCust}", "green");
                             }

@@ -26,7 +26,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 
 builder.Services.AddScoped<ICustomerService, CustomerService>();
-builder.Services.AddScoped<ICustomerRepo, CustomerRepo>();
+builder.Services.AddScoped<ICustomerRepo, CstRepo>();
 
 builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddScoped<IItemRepo, ItemRepo>();
@@ -44,7 +44,7 @@ builder.Services.AddScoped<IOdpService, OdpService>();
 builder.Services.AddScoped<IOdpRepo, OdpRepo>();
 
 builder.Services.AddScoped<IAddressService, AddressService>();
-builder.Services.AddScoped<IAddressRepo, AddressRepo>();
+builder.Services.AddScoped<IAddressRepo, AdrRepo>();
 
 builder.Services.AddScoped<IDlcService, DlcService>();
 builder.Services.AddScoped<IDlcRepo, DlcRepo>();

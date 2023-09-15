@@ -1,5 +1,5 @@
 ﻿using DAL.Interfaces;
-using DAL.Mapper;
+using DAL.Mappers;
 using DAL.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -160,7 +160,7 @@ namespace DAL.Repositories
                             {
                                 while (reader.Read())
                                 {
-									Console.WriteLine(reader["id"]+" "+reader["DtIn"]);
+									//Console.WriteLine(reader["id"]+" "+reader["DtIn"]);
                                     Dlcs.Add(DlcDalMapper.DataToDlcDalLight(reader));
                                 }
                                 TextColor.Write("Dlc", "ReadAllDlcLight", $"Récuperation de {Dlcs.Count} Offres de prix pour le client id {IdCust}", "green");

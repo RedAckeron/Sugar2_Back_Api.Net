@@ -6,7 +6,7 @@ using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace Sugar_Back_V2.Controllers
+namespace ACTRL.Controllers
 {
     
     [Route("/[controller]/")]

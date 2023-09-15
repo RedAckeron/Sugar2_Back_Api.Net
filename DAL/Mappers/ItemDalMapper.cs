@@ -8,9 +8,9 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Mapper
+namespace DAL.Mappers
 {
-    public static class ItemDalMapper
+    public static class ItmDalMapper
     {
         public static ItemDal DataToItemDal(this IDataRecord reader)
         {

@@ -1,14 +1,19 @@
 ﻿using DAL.Interfaces;
-using DAL.Mapper;
+using DAL.Mappers;
 using DAL.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
+using System.Data.SqlClient;
 using System.Reflection.PortableExecutable;
 using ToolBox;
 using Tools.Ado;
+using SqlCommand = Microsoft.Data.SqlClient.SqlCommand;
+using SqlConnection = Microsoft.Data.SqlClient.SqlConnection;
+using SqlDataReader = Microsoft.Data.SqlClient.SqlDataReader;
+
 namespace DAL.Repositories
 {
 	public class RprRepo : IRprRepo
@@ -140,8 +145,8 @@ namespace DAL.Repositories
 			return rows;
 		}
         #endregion
-		#region ReadAllOdpLight
-        public List<RprDalLight> ReadAllOdpLight(int  IdCust)
+		#region ReadAllRprLight
+        public List<RprDalLight> ReadAllRprLight(int  IdCust)
         {
             List<RprDalLight> Rprs = new List<RprDalLight>();
             try
@@ -152,7 +157,7 @@ namespace DAL.Repositories
                     {
                         using (SqlCommand cmd = cnx.CreateCommand())
                         {
-                            cmd.CommandText = $"Exec SP_Odp_ReadAllOdpLight @IdCust={IdCust};";
+                            cmd.CommandText = $"Exec SP_Rpr_ReadAllRprLight @IdCust={IdCust};";
                             cmd.Parameters.AddWithValue("IdCust", IdCust);
 
                             cnx.Open();
@@ -163,7 +168,7 @@ namespace DAL.Repositories
 									//Console.WriteLine(reader["id"]+" "+reader["DtIn"]);
                                     Rprs.Add(RprDalMapper.DataToRprDalLight(reader));
                                 }
-                                TextColor.Write("Odp", "ReadAllOdpLight", $"Récuperation de {Rprs.Count} Offres de prix pour le client id {IdCust}", "green");
+                                TextColor.Write("Rpr", "ReadAllOdpLight", $"Récuperation de {Rprs.Count} Offres de prix pour le client id {IdCust}", "green");
                             }
                         }
                     }

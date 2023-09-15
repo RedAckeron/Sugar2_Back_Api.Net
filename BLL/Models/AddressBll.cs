@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Models
+namespace BLL.Models
 
 {
-    public class UserAddressDal
+    public class AddressBll
     {
         public int Id { get; set; }
-        public int IdUser { get; set; }
         public string AdrInfo { get; set; }
         public string AdrRue { get; set; }
         public string AdrNo { get; set; }
@@ -18,5 +17,10 @@ namespace DAL.Models
         public string AdrCp { get; set; }
         public string AdrPays { get; set; }
 
+    }
+    public class AdrBllLight
+    {
+        public int Id { get; set; }
+        public string AdrInfo { get; set;}
     }
 }

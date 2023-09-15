@@ -1,4 +1,6 @@
-﻿using BLL.Interfaces;
+﻿using ACTRL.Mappers;
+using BLL.Interfaces;
+using BLL.Models;
 using DAL.Interfaces;
 using DAL.Models;
 using DAL.Repositories;
@@ -15,47 +17,29 @@ namespace BLL.Services
         _adresseRepo= adresseRepo;
     }
         
-    public int CreateCustomerAddress(CustomerAddressDal Adr)
+    public int CreateCustomerAddress(int idUser)
         {
-        return _adresseRepo.CreateCustomerAddress(Adr);
+        return _adresseRepo.CreateCustomerAddress(idUser);
+        }
+    public int CreateUserAddress(int idCustomer)
+        {
+            return _adresseRepo.CreateCustomerAddress(idCustomer);
         }
 
-    public CustomerAddressDal ReadCustomerAddress(int IdAdr)
+        public AddressBll Read(int IdAdr)
         {
-        return _adresseRepo.ReadCustomerAddress(IdAdr);
+        return AdrBllMapper.AddressDalToAddressBll(_adresseRepo.Read(IdAdr));
         }
-    public List<CustomerAddressDal> ReadCustomerAllAddress(int IdCust)
+   
+        public int Update(AddressBll adrBll) 
         {
-            return _adresseRepo.ReadCustomerAllAddress(IdCust);
-        }
-        public int UpdateCustomerAddress(CustomerAddressDal Adr) 
-        {
-        return _adresseRepo.UpdateCustomerAddress(Adr);
+        return _adresseRepo.Update(AdrBllMapper.AddressBllToAddressDal(adrBll));
         }  
 
-    public int DeleteCustomerAddress(int id) 
+    public int Delete(int idAddresss) 
         {
-        return _adresseRepo.DeleteCustomerAddress(id);
+        return _adresseRepo.Delete(idAddresss);
         }
 
-    public int CreateUserAddress(UserAddressDal Adr)
-        {
-        return _adresseRepo.CreateUserAddress(Adr);
-        }
-
-    public UserAddressDal ReadUserAddress(int IdAdr)
-        {
-            return _adresseRepo.ReadUserAddress(IdAdr);
-        }
-
-    public int UpdateUserAddress(UserAddressDal Adr)
-        {
-            return _adresseRepo.UpdateUserAddress(Adr);
-        }
-
-    public int DeleteUserAddress(int IdAdr)
-        {
-            return _adresseRepo.DeleteUserAddress(IdAdr);
-        }
     }
 }

@@ -1,7 +1,9 @@
-﻿using BLL.Interfaces;
+﻿using ACTRL.Mappers;
+using ACTRL.Models.Forms;
+using BLL.Interfaces;
 using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace Sugar_Back_V2.Controllers
 {
@@ -16,60 +18,34 @@ namespace Sugar_Back_V2.Controllers
         {
             _addressService = addressService;
         }
-        
-        [HttpPost("CreateCustomerAddress")]
-        public IActionResult CreateCustomerAddress(CustomerAddressDal Adr)
-        {
-            return Ok(_addressService.CreateCustomerAddress(Adr));
-        }
-
-        [HttpGet("ReadCustomerAddress/{IdAdr}")]
-        public IActionResult ReadCustomerAddress(int IdAdr)
-        {
-            return Ok(_addressService.ReadCustomerAddress(IdAdr));
-        }
-
-        [HttpGet("ReadCustomerAllAddress/{IdCust}")]
-        public IActionResult ReadCustomerAllAddress(int IdCust)
-        {
-            return Ok(_addressService.ReadCustomerAllAddress(IdCust));
-        }
-
-        [HttpPut("UpdateCustomerAddress")]
-        public IActionResult UpdateCustomerAddress(CustomerAddressDal Adr)
-        {
-            return Ok(_addressService.UpdateCustomerAddress(Adr));
-        }
-
-        [HttpPost("DeleteCustomerAddress/{IdAdr}")]
-        public IActionResult DeleteCustomerAddress(int IdAdr)
-        {
-            return Ok(_addressService.DeleteCustomerAddress(IdAdr));
-        }
 
         [HttpPost("CreateUserAddress")]
-        public IActionResult CreateUserAddress(UserAddressDal Adr)
+        public IActionResult CreateUserAddress(int idUser)
         {
-            return Ok(_addressService.CreateUserAddress(Adr));
+            return Ok(_addressService.CreateUserAddress(idUser));
         }
 
-        [HttpGet("ReadUserAddress/{IdAdr}")]
-        public IActionResult ReadUserAddress(int IdCust)
+        [HttpPost("CreateCustomerAddress")]
+        public IActionResult CreateCustomerAddress(int idCustomer)
         {
-            return Ok(_addressService.ReadUserAddress(IdCust));
+            return Ok(_addressService.CreateCustomerAddress(idCustomer));
         }
 
-        [HttpPut("UpdateUserAddress")]
-        public IActionResult UpdateUserAddress(UserAddressDal Adr)
+        [HttpGet("Read/{IdAdr}")]
+        public IActionResult Read(int IdAdr)
         {
-            return Ok(_addressService.UpdateUserAddress(Adr));
+            return Ok(_addressService.Read(IdAdr));
+        }
+        [HttpPut("Update")]
+        public IActionResult Update(AddressForm adrForm)
+        {
+            return Ok(_addressService.Update(AdrControllerMapper.AddressFormToAddressBll(adrForm)));
         }
 
-        [HttpPost("DeleteUserAddress/{IdAdr}")]
-        public IActionResult DeleteUserAddress(int IdAdr)
+        [HttpPost("Delete/{IdAdr}")]
+        public IActionResult Delete(int IdAdr)
         {
-            return Ok(_addressService.DeleteUserAddress(IdAdr));
+            return Ok(_addressService.Delete(IdAdr));
         }
-        
     }
 }

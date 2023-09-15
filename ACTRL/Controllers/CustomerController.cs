@@ -1,4 +1,7 @@
-﻿using BLL.Interfaces;
+﻿using ACTRL.Models;
+using Bll.Models;
+using BLL.Interfaces;
+using DAL.Mapper;
 using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,23 +21,23 @@ namespace Sugar_Back_V2.Controllers
         }
 
         [HttpPost("Create")]
-        public IActionResult Create(CustomerDal cust)
+        public IActionResult Create(CustomerForm custForm)
             {
-            //    return Ok(new { Id = _customerService.Create(cust) });
-            return Ok(_customerService.Create(cust));
-        }
+            return Ok(_customerService.Create(CustomerControllerMapper.CustomerFormToCustomerBll(custForm)));
+            }
 
         [HttpGet("Read/{IdCust}")]
 		public IActionResult Read(int IdCust)
             {
-                return Ok(_customerService.Read(IdCust));
-            }
+            if(IdCust!=0) return Ok(_customerService.Read(IdCust));
+            else return BadRequest("L id du client ne peut pas etre 0");
+        }
 
         [HttpPut("Update")]
-        public IActionResult Update(CustomerDal cust)
+        public IActionResult Update(CustomerForm custForm)
             {
-                return Ok(_customerService.Update(cust));
-            }
+                return Ok(_customerService.Update(CustomerControllerMapper.CustomerFormToCustomerBll(custForm)));
+        }
 
         [HttpPost("Delete/{IdCust}")]
         public IActionResult Delete(int IdCust) 

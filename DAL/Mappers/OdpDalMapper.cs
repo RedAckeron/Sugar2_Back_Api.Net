@@ -8,7 +8,7 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Mapper
+namespace DAL.Mappers
 {
 	public static class OdpDalMapper
 	{

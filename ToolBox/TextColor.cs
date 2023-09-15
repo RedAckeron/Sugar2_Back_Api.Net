@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ToolBox.Models;
 namespace ToolBox
 {
 	public class TextColor
@@ -12,6 +12,7 @@ namespace ToolBox
 		public string Color { get; set; }
 		public string Controller{ get; set; }
 		public string Verbe { get; set; }
+		
 		public TextColor(string controller,string verbe,string msg, string color)
 		{
 			Msg = msg;
@@ -21,48 +22,30 @@ namespace ToolBox
 		}
 		
 
-
-
 		public void Write(string ctrl,string verb,string text,string color)
 		{
+            Controller = ctrl;
+			Verbe = verb;
 
-			switch (ctrl.ToLower())
-			{
+            if (Controller.Length <= 18)
+            {
+                for (int i = Controller.Length; i < 18; i++) Controller += " ";
+            }
+            else
+            {
+                Controller = Controller.Substring(0, 18);
+            }
 
-			case "user":Controller = "║USER        ║"; break;
-			case "customer": Controller = "║CUSTOMER    ║"; break;
-			case "item": Controller = "║ITEM        ║"; break;
-			case "cmd": Controller = "║COMMAND     ║"; break;
-			case "odp": Controller = "║ODP         ║"; break;
+            if (Verbe.Length <= 18)
+            {
+                for (int i = Verbe.Length; i < 18; i++) Verbe += " ";
+            }
+            else
+            {
+                Verbe = Verbe.Substring(0, 18);
+            }
 
-				default:
-				{
-					if (ctrl.Length <= 10)
-					{
-						Controller = "║" + ctrl;
-						for (int i = ctrl.Length; i < 12; i++) ctrl += " ";
-						Controller += ("║");
-					}
-					else
-					{
-						Controller = "║" + ctrl.Substring(0, 12) + "║";
-					}
-				} break;
-			}
-
-			switch (verb.ToLower())
-			{
-				case "create": Verbe = "CREATE         ║"; break;
-				case "read": Verbe = "READ           ║"; break;
-				case "update": Verbe = "UPDATE         ║"; break;
-				case "delete": Verbe = "DELETE         ║"; break;
-                case "login": Verbe = "LOGIN          ║"; break;
-                case "findcustomer": Verbe = "FINDCUSTOMER   ║"; break;
-
-                default: Verbe = "UNKNOWN        ║"; break;
-			}
-
-			switch (color.ToLower())
+            switch (color.ToLower())
 			{
 				case "red": Console.BackgroundColor = ConsoleColor.Red; break;
 				case "green": Console.BackgroundColor = ConsoleColor.DarkGreen; break;
@@ -72,7 +55,7 @@ namespace ToolBox
 			}
 			Console.Write(" ");
 			Console.BackgroundColor = ConsoleColor.Black; 
-			Console.WriteLine(Controller+Verbe+text);
+			Console.WriteLine("║" + Controller.ToUpper()+ "║" + Verbe.ToUpper()+"║" + text);
 		}
 	}
 }

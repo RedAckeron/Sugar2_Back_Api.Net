@@ -23,5 +23,20 @@ namespace BLL.Mappers
             DtIn= rprDal.DtIn,
             };
 		}
+        public static List<RprBllLight> RprDalLightToRprBllLight(List<RprDalLight> rprDalLights)
+        {
+            List<RprBllLight> rprBllLights = new List<RprBllLight>();
+
+            foreach (RprDalLight rprDalLight in rprDalLights)
+            {
+                rprBllLights.Add(new RprBllLight()
+                {
+                    Id = rprDalLight.Id,
+                    DtIn = rprDalLight.DtIn,
+                });
+            }
+            return rprBllLights;
+
+        }
     }
 }

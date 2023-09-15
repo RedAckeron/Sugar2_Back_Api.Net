@@ -8,9 +8,9 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Mapper
+namespace DAL.Mappers
 {
-	public static class CmdRepoMapper
+	public static class CmdDalMapper
 	{
 		public static CmdDal DataToCmdDal(this IDataRecord reader)
 		{

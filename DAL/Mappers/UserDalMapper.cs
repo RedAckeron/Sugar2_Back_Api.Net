@@ -8,9 +8,9 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Mapper
+namespace DAL.Mappers
 {
-    public static class UserMapper
+    public static class UserDalMapper
     {
 		public static UserDal DataToUser(this IDataRecord reader)
 		{

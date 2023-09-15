@@ -1,5 +1,5 @@
 ﻿using DAL.Interfaces;
-using DAL.Mapper;
+using DAL.Mappers;
 using DAL.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -151,7 +151,7 @@ namespace DAL.Repositories
                     {
                         using (SqlCommand cmd = cnx.CreateCommand())
                         {
-                            cmd.CommandText = $"Exec SP_Odp_ReadAllOdpLight @IdCust={IdCust};";
+                            cmd.CommandText = $"Exec SP_Fct_ReadAllFctLight @IdCust={IdCust};";
                             cmd.Parameters.AddWithValue("IdCust", IdCust);
 
                             cnx.Open();
@@ -159,10 +159,10 @@ namespace DAL.Repositories
                             {
                                 while (reader.Read())
                                 {
-									Console.WriteLine(reader["id"]+" "+reader["DtIn"]);
+									
                                     Fcts.Add(FctDalMapper.DataToFctDalLight(reader));
                                 }
-                                TextColor.Write("Odp", "ReadAllOdpLight", $"Récuperation de {Fcts.Count} Offres de prix pour le client id {IdCust}", "green");
+                                TextColor.Write("Fct", "ReadAllFctLight", $"Récuperation de {Fcts.Count} Offres de prix pour le client id {IdCust}", "green");
                             }
                         }
                     }
@@ -170,7 +170,7 @@ namespace DAL.Repositories
             }
             catch (Exception ex)
             {
-                TextColor.Write("Command", "ReadAllCmdLight", ex.Message, "orange");
+                TextColor.Write("Fct", "ReadAllFctLight", ex.Message, "orange");
             }
             return Fcts;
         }

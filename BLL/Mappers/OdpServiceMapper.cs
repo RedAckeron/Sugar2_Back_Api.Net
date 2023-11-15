@@ -39,12 +39,13 @@ namespace BLL.Mappers
                 odpBllLights.Add(new OdpBllLight()
                 {
                     Id = odpDalLight.Id,
+                    Name = odpDalLight.Name,
                     DtIn = odpDalLight.DtIn,
+                    //PrxTtl= odpDalLight.PrxTtl,
+                    //NbItem= odpDalLight.NbItem
                 });
             }
             return odpBllLights;
-
         }
-        
     }
 }

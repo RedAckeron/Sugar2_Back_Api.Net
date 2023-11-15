@@ -10,6 +10,7 @@ namespace BLL.Interfaces
         int Update(OdpBll OdpBll);
         int Delete(int IdOdp);
         List<OdpBllLight> ReadAllOdpLight(int IDCust);
+        List<OdpBllLight> ReadLastOdpLight();
 
     }
 }

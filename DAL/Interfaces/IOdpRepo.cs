@@ -10,6 +10,6 @@ namespace DAL.Interfaces
         int Delete(int IdOdp);
         int AddItemToOdp(int IdOdp, int IdItem, int Qt, int AddByUser);
         List<OdpDalLight> ReadAllOdpLight(int IdCust);
-
-        }
+        List<OdpDalLight> ReadLastOdpLight();
+    }
 }

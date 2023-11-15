@@ -18,6 +18,9 @@ namespace DAL.Models
     public class OdpDalLight
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public DateTime DtIn { get; set; }
+        //public int NbItem { get; set; } = 0;
+        //public int PrxTtl { get; set; } = 0;
     }
 }

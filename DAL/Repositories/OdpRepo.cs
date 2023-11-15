@@ -140,7 +140,46 @@ namespace DAL.Repositories
 			return rows;
 		}
         #endregion
-		#region ReadAllOdpLight
+
+		#region ReadOdpLight
+        public OdpDalLight ReadOdpLight(int IdOdp)
+        {
+            OdpDalLight Odp = new OdpDalLight();
+            try
+            {
+                using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+                {
+                    using (SqlConnection cnx = new SqlConnection(_connectionString))
+                    {
+                        using (SqlCommand cmd = cnx.CreateCommand())
+                        {
+                            cmd.CommandText = $"Exec SP_Odp_Read @IdOdp";
+                            cmd.Parameters.AddWithValue("IdOdp", IdOdp);
+
+                            cnx.Open();
+                            //result = DbConnectionExtensions.ExecuteScalar(dbConnection, "SP_Customer_Create", true, new { C.FirstName, C.LastName, C.Email, C.Call1, C.Call2, C.AddByUser });
+
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    Odp=OdpDalMapper.DataToOdpDalLight(reader);
+                                }
+                                TextColor.Write("Odp", "ReadAllOdpLight", $"Récuperation de 1 Offres de prix id {IdOdp}", "green");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TextColor.Write("Odp", "ReadAllOdpLight", ex.Message, "orange");
+            }
+            return Odp;
+        }
+        #endregion
+
+        #region ReadAllOdpLight
         public List<OdpDalLight> ReadAllOdpLight(int  IdCust)
         {
             List<OdpDalLight> Odps = new List<OdpDalLight>();
@@ -170,10 +209,51 @@ namespace DAL.Repositories
             }
             catch (Exception ex)
             {
-                TextColor.Write("Command", "ReadAllOdpLight", ex.Message, "orange");
+                TextColor.Write("Odp", "ReadAllOdpLight", ex.Message, "orange");
             }
             return Odps;
         }
         #endregion
+
+        #region ReadLastOdpLight
+        public List<OdpDalLight> ReadLastOdpLight()
+        {
+			List<OdpDalLight> Odps = new List<OdpDalLight>();
+            try
+            {
+                using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+                {
+                    using (SqlConnection cnx = new SqlConnection(_connectionString))
+                    {
+                        using (SqlCommand cmd = cnx.CreateCommand())
+                        {
+                            cmd.CommandText = $"Exec SP_Odp_ReadLastOdpLight;";
+
+                            cnx.Open();
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+									OdpDalLight odpDalLight = OdpDalMapper.DataToOdpDalLight(reader);
+                                    //odpDalLight.PrxTtl = (((int)reader["pv"])*((int)reader["Qt"]));
+                                    //odpDalLight.NbItem = (int)reader["Qt"];
+                                    Odps.Add(odpDalLight);
+
+                                    //Odps.Add(OdpDalMapper.DataToOdpDalLight(reader));
+                                }
+                                TextColor.Write("Odp", "ReadLastOdpLight", $"Récuperation de {Odps.Count} Offres de prix", "green");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TextColor.Write("Odp", "ReadLastOdpLight", ex.Message, "orange");
+            }
+            return Odps;
+        }
+        #endregion
+
     }
 }

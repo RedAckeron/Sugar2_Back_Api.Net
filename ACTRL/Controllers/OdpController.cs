@@ -45,10 +45,16 @@ namespace Sugar_Back_V2.Controllers
             return Ok(_odpService.Delete(IdOdp));
         }
 
-        [HttpGet("ReadAllOdpLight/{IdCust}")]
+        [HttpGet("ReadAllCstOdpLight/{IdCust}")]
         public IActionResult ReadAllOdpLight(int IdCust)
         {
             return Ok(_odpService.ReadAllOdpLight(IdCust));
+        }
+
+        [HttpGet("ReadLastOdpLight/")]
+        public IActionResult ReadLastOdpLight()
+        {
+            return Ok(_odpService.ReadLastOdpLight());
         }
     }
 }

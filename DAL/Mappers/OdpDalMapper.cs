@@ -24,10 +24,13 @@ namespace DAL.Mappers
 		}
 		public static OdpDalLight DataToOdpDalLight(this IDataRecord reader)
 		{
-			return new OdpDalLight()
+           
+            return new OdpDalLight()
 			{
 				Id = (int)reader["id"],
+				Name = (string)reader["FirstName"]+" "+(string)reader["LastName"],
 				DtIn = (DateTime)reader["DtIn"],
+				
 			};
 		
 		}

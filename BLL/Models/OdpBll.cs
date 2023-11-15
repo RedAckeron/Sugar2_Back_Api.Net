@@ -20,7 +20,9 @@ namespace BLL.Models
     public class OdpBllLight
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public DateTime DtIn { get; set; }
-
+        public int NbItem { get; set; }
+        public int PrxTtl { get; set; }
     }
 }

@@ -35,11 +35,18 @@ namespace BLL.Services
         {
             return _odpRepo.Delete(IdOdp);
         }
-    #region ReadAllCmdLight
+    #region ReadAllOdpLight
     public List<OdpBllLight> ReadAllOdpLight(int IdCust)
         {
             return OdpServiceMapper.OdpDalLightToOdpBllLight(_odpRepo.ReadAllOdpLight(IdCust));
         }
-        #endregion
+    #endregion
+
+    #region ReadAllOdpLight
+    public List<OdpBllLight> ReadLastOdpLight()
+        {
+            return OdpServiceMapper.OdpDalLightToOdpBllLight(_odpRepo.ReadLastOdpLight());
+        }
+    #endregion
     }
 }
